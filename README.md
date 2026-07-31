@@ -26,6 +26,24 @@
   - 道順動画 → アクセスセクション+Googleビジネスプロフィールに差し込み予定
   - おもてなし表現動画 → PARK別館のヒーロー背景に差し込み予定
 
+## デプロイ
+
+Vercelでホスティングします(`vercel.json` を同梱。ビルド不要の静的サイトです)。
+
+1. https://vercel.com/new を開き、GitHubアカウントで連携
+2. リポジトリ `kakuijoe-stack/KJ` をインポート
+3. Framework Preset は **Other**、Build Command は空欄、Output Directory は `.` のまま Deploy
+4. デプロイ後、Project → Settings → Git → **Production Branch** を
+   `claude/alvella-recruitment-homepage-ugxv0g` に設定(このリポジトリのデフォルトブランチは
+   別ブランチのため、この設定をしないと本番URLに反映されません)
+
+以後、このブランチへのプッシュで自動的に再デプロイされます。
+ページ構成: `/`(公式)、`/park.html`(別館)、`/recruit.html`(採用)。
+
+※ GitHub Pages でも公開できますが、リポジトリのデフォルトブランチが別ブランチのため、
+`github-pages` 環境の Deployment branches に当ブランチを許可する設定が別途必要です
+(`.github/workflows/deploy-pages.yml` は手動実行のみに変更済み)。
+
 ## 公開前TODO(お兄さんに確認する項目)
 
 HTML内の `<!-- TODO -->` コメントと対応しています。

@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Deployment is handled by Vercel (see vercel.json). This workflow is kept for
+# the option of publishing to GitHub Pages instead, and runs only on demand.
+# Pages requires the branch to be allowed in the github-pages environment,
+# since the repository default branch is a different branch.
 on:
-  push:
-    branches: [claude/alvella-recruitment-homepage-ugxv0g]
   workflow_dispatch:
 
 permissions:
