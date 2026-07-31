@@ -177,14 +177,65 @@ h1 em{font-style:normal;color:var(--midori);border-bottom:2px solid var(--kincha
 .message-inner{display:grid;grid-template-columns:220px 1fr;gap:60px;align-items:start}
 @media(max-width:820px){.message-inner{grid-template-columns:1fr;gap:36px}}
 .owner-visual{
-  aspect-ratio:3/4;border-radius:2px;position:relative;
-  background:
-    linear-gradient(160deg, rgba(217,200,192,.55), rgba(183,155,108,.3) 60%, rgba(62,74,61,.25)),
-    var(--paper);
+  border-radius:2px;position:relative;overflow:hidden;
   border:1px solid rgba(183,155,108,.4);
-  display:flex;align-items:flex-end;justify-content:center;padding:18px;
 }
-.owner-visual span{font-size:11px;letter-spacing:.2em;color:var(--midori)}
+.owner-visual img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ---------- 働く仲間 ---------- */
+.members{background:var(--paper)}
+.member-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.member-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.member-grid{grid-template-columns:1fr}}
+.member-card{background:var(--kinari);border:1px solid rgba(183,155,108,.4);border-radius:2px;overflow:hidden}
+.member-card .ph{aspect-ratio:4/3;overflow:hidden}
+.member-card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.member-card .body{padding:20px 22px 24px}
+.member-card .role{font-size:11px;letter-spacing:.08em;color:#8a7451;margin-bottom:6px}
+.member-card h3{font-family:var(--serif);font-size:19px;letter-spacing:.12em;font-weight:600}
+.member-card h3 small{font-size:11px;letter-spacing:.08em;color:#8a8578;margin-left:8px}
+.member-card p{font-size:13px;color:#565349;margin-top:8px}
+.member-card a{font-size:12px;font-weight:700;color:#8a7451;text-decoration:none;border-bottom:1px solid var(--kincha);padding-bottom:2px}
+
+/* ---------- 働く環境ギャラリー ---------- */
+.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.env-grid{grid-template-columns:1fr 1fr}}
+.env-grid figure{margin:0;position:relative;overflow:hidden;border-radius:2px;aspect-ratio:4/3;border:1px solid rgba(183,155,108,.35)}
+.env-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.env-grid figure:hover img{transform:scale(1.04)}
+.env-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:11px;letter-spacing:.06em;color:#fff;background:linear-gradient(transparent,rgba(43,42,38,.75))}
+
+/* ---------- キャリアパス ---------- */
+.career-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+@media(max-width:900px){.career-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.career-grid{grid-template-columns:1fr}}
+.career-card{background:var(--paper);border:1px solid rgba(183,155,108,.4);border-radius:2px;padding:24px 20px}
+.career-card b{font-family:var(--serif);font-size:12px;letter-spacing:.2em;color:#8a7451}
+.career-card h3{font-family:var(--serif);font-size:18px;letter-spacing:.08em;margin:8px 0;font-weight:600;color:var(--midori);word-break:keep-all}
+.career-card p{font-size:12px;color:#565349}
+
+/* ---------- 求める人物像 ---------- */
+.persona{background:var(--midori);color:var(--kinari)}
+.persona .sec-label{color:var(--kincha)}
+.persona .sec-title{color:#fff}
+.persona .sec-lead{color:rgba(247,244,239,.8)}
+.persona-list{max-width:720px}
+.persona-list li{list-style:none;border-top:1px solid rgba(183,155,108,.4);padding:20px 0;display:grid;grid-template-columns:56px 1fr;gap:18px}
+.persona-list li b{font-family:var(--serif);font-size:22px;color:var(--kincha);letter-spacing:.1em}
+.persona-list h3{font-size:16px;font-weight:700;margin-bottom:4px;color:#fff}
+.persona-list p{font-size:13px;color:rgba(247,244,239,.82)}
+.persona-note{font-size:12px;color:rgba(247,244,239,.65);margin-top:24px;max-width:720px}
+
+/* ---------- 選考の流れ ---------- */
+.flow-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+@media(max-width:820px){.flow-steps{grid-template-columns:1fr;gap:12px}}
+.flow-step{background:var(--paper);border:1px solid rgba(183,155,108,.4);border-radius:2px;padding:24px 20px;position:relative}
+.flow-step::after{content:"";position:absolute;top:50%;right:-15px;width:12px;height:1px;background:var(--kincha)}
+.flow-step:last-child::after{display:none}
+@media(max-width:820px){.flow-step::after{top:auto;bottom:-8px;right:50%;width:1px;height:7px}}
+.flow-step .no{font-size:11px;letter-spacing:.25em;color:var(--kincha);font-weight:700;margin-bottom:6px}
+.flow-step h3{font-family:var(--serif);font-size:17px;letter-spacing:.08em;margin-bottom:8px;font-weight:600}
+.flow-step p{font-size:12px;color:#565349;line-height:1.8}
 .message-body p{margin-bottom:1.4em;color:#3c3a34}
 .message-sign{
   margin-top:36px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
@@ -474,8 +525,8 @@ footer .flinks a:hover{color:var(--kincha)}
     <h2 class="sec-title reveal">感動体験を、つくる側へ。</h2>
     <div class="message-inner">
       <div class="owner-visual reveal d1">
-        <!-- TODO: オーナーのポートレート写真に差し替え -->
-        <span>OWNER / RYU KAKUI</span>
+        <img src="assets/owner.jpg" alt="ALVELLAオーナーの角井竜" loading="lazy" width="679" height="509">
+        <!-- 集合写真から切り出し。プロ撮影ポートレートが用意でき次第差し替え推奨 -->
       </div>
       <div class="message-body reveal d2">
         <!-- NOTE: 以下のメッセージは公開情報をもとにした草稿です。公開前に必ずご本人の確認・加筆をお願いします -->
@@ -485,7 +536,7 @@ footer .flinks a:hover{color:var(--kincha)}
         <p>技術は、あとからいくらでも教えられます。挨拶ができて、ありがとうを言える人。お客様と仲間を大切にできる人。そんなあなたに会えるのを、楽しみにしています。</p>
         <div class="message-sign">
           <div>
-            <p class="role">ALVELLA オーナー</p>
+            <p class="role">ALVELLA オーナー|期待を超えるおもてなしプロデューサー(美容師歴11年)</p>
             <p class="name serif">角井 竜<span style="font-size:13px;letter-spacing:.1em;color:#8a7451;margin-left:10px">RYU KAKUI</span></p>
           </div>
           <a class="ig-link" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a>
@@ -534,6 +585,45 @@ footer .flinks a:hover{color:var(--kincha)}
   </div>
 </section>
 
+<!-- ================= 働く仲間 ================= -->
+<section class="members" id="members">
+  <div class="wrap">
+    <p class="sec-label reveal">Members</p>
+    <h2 class="sec-title reveal">一緒に働く、先輩たち。</h2>
+    <p class="sec-lead reveal d1">少人数だから、一人ひとりの顔が見えるチームです。得意分野の違う先輩たちが、あなたの成長に伴走します。</p>
+    <div class="member-grid reveal d1">
+      <div class="member-card">
+        <div class="ph"><img src="assets/owner.jpg" alt="オーナーの角井竜" loading="lazy" width="679" height="509"></div>
+        <div class="body">
+          <p class="role">オーナー|期待を超えるおもてなしプロデューサー(歴11年)</p>
+          <h3>角井 竜<small>カクイ リュウ</small></h3>
+          <p>【30代】大人可愛いを叶える美髪プロデュース。サロンの理念「テーマパークのようなおもてなし」の発信源。</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a></p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="ph"><img src="assets/portrait-staff.jpg" alt="スタイリストの澁谷憂樹" loading="lazy" width="960" height="1280"></div>
+        <div class="body">
+          <p class="role">トータルケアコンシェルジュ(歴6年)</p>
+          <h3>澁谷 憂樹<small>シブヤ ユウキ</small></h3>
+          <p>【20代 支持率No.1】丁寧なカウンセリングが好評。艶髪スタイルと髪質改善メニューが得意な先輩です。</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">@alvella_yuuki</a></p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="ph"><img src="assets/giriko.jpg" alt="スタイリストの儀利古真奈" loading="lazy" width="591" height="443"></div>
+        <div class="body">
+          <p class="role">韓国好き美容師(歴5年)</p>
+          <h3>儀利古 真奈<small>ギリコ マナ</small></h3>
+          <p>韓国スタイル・透明感カラーが得意。「美容院は緊張する」というお客様に寄り添う空間づくりの名手。</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">@alvella_giriko</a></p>
+        </div>
+      </div>
+    </div>
+    <!-- TODO: スタッフインタビュー動画(儀利古さん / 澁谷さん)が書き出せたら、このセクション下部にクリック再生+要約テキストで設置 -->
+  </div>
+</section>
+
 <!-- ================= 教育・デビューまで ================= -->
 <section class="washi" id="education">
   <div class="wrap">
@@ -569,6 +659,37 @@ footer .flinks a:hover{color:var(--kincha)}
   </div>
 </section>
 
+<!-- ================= デビュー後のキャリア ================= -->
+<section class="washi" id="career">
+  <div class="wrap">
+    <p class="sec-label reveal">Career Path</p>
+    <h2 class="sec-title reveal">デビューは、ゴールじゃない。</h2>
+    <p class="sec-lead reveal d1">スタイリストになった先の道も、一人ひとりに合わせて描けるように。小さなサロンだからこそ、手を挙げた人に役割が生まれます。</p>
+    <div class="career-grid reveal d1">
+      <div class="career-card">
+        <b>PATH 01</b>
+        <h3>技術を極める</h3>
+        <p>髪質改善・ヘッドスパの専門性を磨き、指名で選ばれるスタイリストへ。メーカー講習で学びは続きます。</p>
+      </div>
+      <div class="career-card">
+        <b>PATH 02</b>
+        <h3>教育に携わる</h3>
+        <p>個別レッスンの担い手として、後輩の成長に伴走する道。教えることは、いちばんの学びでもあります。</p>
+      </div>
+      <div class="career-card">
+        <b>PATH 03</b>
+        <h3>お店をつくる</h3>
+        <p>サロンワークの先にある、店づくり・チームづくりへ。少人数の店だから、経営の近くで働けます。</p>
+      </div>
+      <div class="career-card">
+        <b>PATH 04</b>
+        <h3>独立する</h3>
+        <p>独立支援制度があります。ALVELLAで学んだ技術とおもてなしを、自分の店で。送り出すのも私たちの誇りです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= 一日の流れ ================= -->
 <section class="day" id="day">
   <div class="wrap">
@@ -600,6 +721,23 @@ footer .flinks a:hover{color:var(--kincha)}
   </div>
 </section>
 
+<!-- ================= 働く環境 ================= -->
+<section class="washi" id="environment">
+  <div class="wrap">
+    <p class="sec-label reveal">Environment</p>
+    <h2 class="sec-title reveal">働く場所を、先に見せます。</h2>
+    <p class="sec-lead reveal d1">ネイビーと金の額縁ミラー。あなたが毎日立つことになる場所です。営業は19:00まで、月曜・火曜はお店ごと休み。時間の見通しが立つ働き方ができます。</p>
+    <div class="env-grid reveal d1">
+      <figure><img src="assets/interior-main.jpg" alt="金の額縁ミラーが並ぶ店内" loading="lazy" width="1479" height="1109"><figcaption>セット面4席・半個室のフロア</figcaption></figure>
+      <figure><img src="assets/interior-booth.jpg" alt="半個室ブース" loading="lazy" width="1400" height="1050"><figcaption>一組ごとの、落ち着いた施術空間</figcaption></figure>
+      <figure><img src="assets/welcome.jpg" alt="エントランスでお出迎えするスタッフ" loading="lazy" width="1400" height="1050"><figcaption>ネイビーのエントランス</figcaption></figure>
+      <figure><img src="assets/styling.jpg" alt="施術風景" loading="lazy" width="1156" height="648"><figcaption>マンツーマンのサロンワーク</figcaption></figure>
+      <figure><img src="assets/counseling-2.jpg" alt="カウンセリングの様子" loading="lazy" width="1400" height="1050"><figcaption>時間をかけるカウンセリング</figcaption></figure>
+      <figure><img src="assets/team.jpg" alt="スタッフの集合写真" loading="lazy" width="1400" height="1050"><figcaption>少人数の、あたたかいチーム</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- ================= 先輩の声 ================= -->
 <section class="washi" id="voice">
   <div class="wrap">
@@ -627,6 +765,21 @@ footer .flinks a:hover{color:var(--kincha)}
   </div>
 </section>
 
+<!-- ================= 求める人物像 ================= -->
+<section class="persona" id="persona">
+  <div class="wrap">
+    <p class="sec-label reveal">Who We Want</p>
+    <h2 class="sec-title reveal">技術より先に、見ているもの。</h2>
+    <p class="sec-lead reveal d1">技術は、あとからいくらでも教えられます。私たちが最初に見ているのは、もっと手前にあるものです。</p>
+    <ul class="persona-list reveal d1">
+      <li><b>01</b><div><h3>挨拶ができて、ありがとうを言える人</h3><p>おもてなしの始まりは、いつも挨拶から。お客様にも、仲間にも、感謝を言葉にできる人と働きたいと思っています。</p></div></li>
+      <li><b>02</b><div><h3>「おもてなし」にワクワクできる人</h3><p>テーマパークのような感動体験をつくるのがALVELLAの流儀。喜ばせるための工夫を、楽しめる人に向いています。</p></div></li>
+      <li><b>03</b><div><h3>髪の健康と、丁寧に向き合いたい人</h3><p>流行を追うだけでなく、10年先の美髪まで考える。一人のお客様とじっくり向き合う接客が好きな人に合う環境です。</p></div></li>
+    </ul>
+    <p class="persona-note">※正直に書くと——回転数で数をこなすスタイルのサロンではないので、「とにかく速く・多く」を求める方には向かないかもしれません。そのぶん、一人ひとりと深く向き合いたい方には、これ以上ない環境だと思います。未経験・通信制在学中・新卒、いずれも歓迎です。</p>
+  </div>
+</section>
+
 <!-- ================= 募集要項 ================= -->
 <section class="recruit values" id="recruit">
   <div class="wrap">
@@ -642,11 +795,26 @@ footer .flinks a:hover{color:var(--kincha)}
         <tr><th>福利厚生</th><td>社会保険完備(雇用・労災・健康・厚生年金)/交通費支給(月15,000円まで)/住宅手当/健康診断(年1回)/独立支援制度/食事補助(昼にお米の支給)</td></tr>
         <tr><th>教育制度</th><td>独自カリキュラム×個別レッスン/営業時間内レッスン/メーカー講習/カウンセリング・スタイリング研修/最短1年半でスタイリストデビュー</td></tr>
         <tr><th>応募資格</th><td>美容師免許保持者または取得見込みの方<br>未経験・通信制在学中・新卒歓迎/中途で技術に不安のある方も個別にサポートします</td></tr>
-        <tr><th>勤務地</th><td>ALVELLA(アルベラ)<br>京都府京都市中京区玉蔵町123 グランレブリー室町六角101<br>地下鉄「烏丸御池駅」徒歩5分/阪急「烏丸駅」・地下鉄「四条駅」徒歩6分</td></tr>
+        <tr><th>勤務地</th><td>ALVELLA(アルベラ)<br>京都府京都市中京区玉蔵町123 グランレブリー室町六角101<br>地下鉄「四条駅」22番出口・「烏丸御池駅」6番出口から徒歩6分</td></tr>
         <tr><th>運営会社</th><td>株式会社ALVELLA</td></tr>
       </table>
     </div>
     <p class="recruit-note">※掲載内容は求人媒体の公開情報に基づきます。最新の条件は見学・面接時にご確認ください。</p>
+  </div>
+</section>
+
+<!-- ================= 選考の流れ ================= -->
+<section id="flow">
+  <div class="wrap">
+    <p class="sec-label reveal">Flow</p>
+    <h2 class="sec-title reveal">応募から入社まで。</h2>
+    <p class="sec-lead reveal d1">かしこまった就活より、まずお互いを知ることから。見学からのスタートをおすすめしています。</p>
+    <div class="flow-steps reveal d1">
+      <div class="flow-step"><p class="no">STEP 01</p><h3>サロン見学</h3><p>私服OK・手ぶらOK。サロンの空気と先輩の働き方を、あなたの目で確かめてください(任意ですがおすすめです)。</p></div>
+      <div class="flow-step"><p class="no">STEP 02</p><h3>応募</h3><p>InstagramのDM、または求人媒体(QJナビ等)からご応募ください。履歴書の準備はその後で大丈夫です。</p></div>
+      <div class="flow-step"><p class="no">STEP 03</p><h3>面接</h3><p>サロンでゆっくりお話しします。聞きにくいこと(給与・休み・練習)こそ、遠慮なく聞いてください。</p></div>
+      <div class="flow-step"><p class="no">STEP 04</p><h3>内定・入社</h3><p>入社日はご事情に合わせて相談できます。通信制在学中の方は学業との両立もご相談ください。</p></div>
+    </div>
   </div>
 </section>
 
@@ -681,6 +849,14 @@ footer .flinks a:hover{color:var(--kincha)}
         <p class="answer">美意識の高い30〜40代の大人女性が中心で、髪質改善・ヘッドスパ・艶カラーなどのケアメニューが主力です。半個室でのマンツーマン施術なので、一人ひとりとじっくり向き合えます。</p>
       </details>
       <details>
+        <summary>営業時間と、働く時間のイメージは?</summary>
+        <p class="answer">サロンの営業は9:00〜19:00、定休日は毎週月曜・火曜です。1日実働8時間・週5日勤務で、完全予約制のため一日の見通しが立てやすい環境です。</p>
+      </details>
+      <details>
+        <summary>一人暮らしでも生活できますか?</summary>
+        <p class="answer">社会保険完備に加えて、住宅手当と交通費支給(月15,000円まで)があります。京都市外からの通勤・転居のご相談も面接時にどうぞ。</p>
+      </details>
+      <details>
         <summary>見学だけでも大丈夫ですか?服装は?</summary>
         <p class="answer">もちろんです。むしろ、まず見学からをおすすめしています。私服で、手ぶらでお越しください。InstagramのDMから気軽にお申し込みいただけます。</p>
       </details>
@@ -702,8 +878,18 @@ footer .flinks a:hover{color:var(--kincha)}
       </div>
       <div class="insta-card">
         <p class="handle serif">@alvella_kakui</p>
-        <p>オーナー角井の発信。技術のこと、サロンづくりへの想いはこちらから。</p>
-        <a class="btn btn-line" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">オーナーアカウントを見る</a>
+        <p>オーナー角井(歴11年)の発信。サロンの何気ない日常と、店づくりへの想い。</p>
+        <a class="btn btn-line" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">オーナーの日常を見る</a>
+      </div>
+      <div class="insta-card">
+        <p class="handle serif">@alvella_yuuki</p>
+        <p>澁谷(歴6年)の艶髪写真。先輩がどんな仕事をしているか、作品から伝わります。</p>
+        <a class="btn btn-line" href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">艶髪の仕事を見る</a>
+      </div>
+      <div class="insta-card">
+        <p class="handle serif">@alvella_giriko</p>
+        <p>儀利古(歴5年)の笑顔あふれる日常投稿。チームの雰囲気はここがいちばん分かるかも。</p>
+        <a class="btn btn-line" href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">日常の空気を見る</a>
       </div>
     </div>
   </div>
