@@ -3,14 +3,13 @@
 京都・烏丸御池の髪質改善&ヘッドスパサロン **ALVELLA** の公式サイト一式です。
 静的HTMLのみで構成されており、レンタルサーバー・GitHub Pages・Netlify等にそのまま置けば公開できます(サイト上で決済は行わないため静的ホスティングで問題ありません)。
 
-## 構成(3ページ+素材)
+## 構成(1ページ統合・iPhone最適化)
 
 | ファイル | 役割 |
 |---|---|
-| `index.html` | **公式サイト(顧客向けトップ)** — コンセプト/メニュー・料金/髪質改善・ヘッドスパ/はじめての方へ/スタッフ/ギャラリー/口コミ/アクセス/予約 |
-| `park.html` | **PARK HAIR GUIDE(別館)** — パーク前ヘアの案内所。遊び心担当。権利注記あり |
-| `recruit.html` | **採用サイト** — 求職者向け。数字の透明性+見学CTA。JobPosting構造化データ実装済み |
-| `assets/` | 写真素材(圧縮済み・全て300KB以下) |
+| `index.html` | **統合サイト** — サロン/パーク/採用の3ビューを画面下部の固定タブバーで切り替えるSPA風の1ファイル。ハッシュルーティング(`#park` `#recruit` `#セクションID`)対応。ボトムシート型の全セクションメニュー付き |
+| `park.html` / `recruit.html` | 旧URL互換のリダイレクト(`index.html#park` / `#recruit` へ転送) |
+| `assets/` | 写真(圧縮済み・300KB以下)+動画(intro.mp4 / headspa.mp4) |
 
 ## 設計方針(調査に基づく)
 
@@ -28,21 +27,21 @@
 
 ## デプロイ
 
-Vercelでホスティングします(`vercel.json` を同梱。ビルド不要の静的サイトです)。
+**GitHub Pagesで公開中**: https://kakuijoe-stack.github.io/KJ/
 
-1. https://vercel.com/new を開き、GitHubアカウントで連携
-2. リポジトリ `kakuijoe-stack/KJ` をインポート
-3. Framework Preset は **Other**、Build Command は空欄、Output Directory は `.` のまま Deploy
-4. デプロイ後、Project → Settings → Git → **Production Branch** を
-   `claude/alvella-recruitment-homepage-ugxv0g` に設定(このリポジトリのデフォルトブランチは
-   別ブランチのため、この設定をしないと本番URLに反映されません)
+ブランチ `claude/alvella-recruitment-homepage-ugxv0g` へのプッシュで
+`.github/workflows/deploy-pages.yml` が自動デプロイします(反映まで1〜2分)。
+※ `github-pages` 環境の Deployment branches に当ブランチを許可済みであること。
 
-以後、このブランチへのプッシュで自動的に再デプロイされます。
-ページ構成: `/`(公式)、`/park.html`(別館)、`/recruit.html`(採用)。
+Vercelに切り替える場合は `vercel.json` 同梱済み(インポート後、Production Branchを当ブランチに設定)。
 
-※ GitHub Pages でも公開できますが、リポジトリのデフォルトブランチが別ブランチのため、
-`github-pages` 環境の Deployment branches に当ブランチを許可する設定が別途必要です
-(`.github/workflows/deploy-pages.yml` は手動実行のみに変更済み)。
+## PARKページの拡張ロードマップ(API連携)
+
+`index.html` のPARKビューには、今後の拡張の受け皿となる枠を実装済み(`#p-live` / `#p-ugc`。HTML内にTODOコメントあり):
+
+- **ライブ・パーク情報**(準備中表示中): アトラクション待ち時間 / 天気+髪の広がり注意報 / ショー・パレード予定 / スタッフ監修モデルコース。静的サイトのままクライアントサイドJSで公開APIを叩く実装が可能。widget内をJSで差し込む設計
+- **みんなのパークレポート**(UGC枠): ハッシュタグ投稿(名称は要確定)を許諾のうえ掲載する6枠を用意
+- **スタッフの小技帖**: 手動更新のコンテンツ枠。Instagramストーリーと連動運用
 
 ## 公開前TODO(お兄さんに確認する項目)
 

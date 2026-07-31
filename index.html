@@ -202,8 +202,8 @@ header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-
 .nums .n{font-size:12px;color:rgba(247,244,239,.62);margin-top:4px;line-height:1.4}
 
 /* timeline */
-.tl div{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(183,151,94,.5)}
-.tl div:last-child{border-bottom:none}
+.tl>div{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(183,151,94,.5)}
+.tl>div:last-child{border-bottom:none}
 .tl .t{font-family:var(--serif);font-size:15px;letter-spacing:.06em;color:var(--accent-dp);font-weight:600}
 .tl h3{font-size:15px;font-weight:700;margin-bottom:2px}
 .tl p{font-size:14px;color:var(--ink-2)}
@@ -214,7 +214,7 @@ header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-
 .park-band .sec-label::before{background:var(--gold-lt)}
 .park-band .sec-title{color:#fff}
 .park-band .sec-lead,.park-band p{color:rgba(255,255,255,.88)}
-.park-band .tl div{border-color:rgba(255,255,255,.3)}
+.park-band .tl>div{border-color:rgba(255,255,255,.3)}
 .park-band .tl .t{color:var(--gold-lt)}
 .big-time{font-family:var(--serif);font-size:44px;color:var(--gold-lt);letter-spacing:.04em;font-weight:600;line-height:1.1}
 .idea{background:#fff;border:1px solid rgba(183,151,94,.4);border-radius:4px;padding:18px}
@@ -239,6 +239,23 @@ header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-
 .quiz-band .qno{font-family:var(--serif);color:var(--gold-lt);letter-spacing:.12em;margin-right:8px}
 .quiz-band .ans{padding:0 18px 18px;font-size:14.5px;color:rgba(255,255,255,.9)}
 .quiz-band .ans b{color:var(--gold-lt)}
+
+/* live dashboard / tips / ugc */
+.live-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.widget{background:#fff;border:1px solid rgba(183,151,94,.4);border-radius:4px;padding:18px;position:relative;overflow:hidden}
+.widget .w-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;padding-right:96px}
+.widget .w-ic{font-size:20px;line-height:1}
+.widget h3{font-family:var(--serif);font-size:17px;color:var(--plum);font-weight:600}
+.widget p{font-size:13.5px;color:var(--ink-2)}
+.widget .soon-pill{position:absolute;top:14px;right:14px;font-size:11.5px;font-weight:700;color:var(--rose);border:1px solid rgba(179,50,95,.45);border-radius:999px;padding:3px 10px;background:rgba(179,50,95,.06)}
+.skel{height:10px;border-radius:99px;background:linear-gradient(90deg,#EFE8DC 25%,#E2D8C6 50%,#EFE8DC 75%);background-size:200% 100%;animation:sk 1.8s infinite;margin-top:10px}
+.skel.s2{width:70%}.skel.s3{width:45%}
+@keyframes sk{from{background-position:200% 0}to{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.skel{animation:none}}
+.ugc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.ugc{aspect-ratio:1/1;border:1.5px dashed rgba(179,50,95,.45);border-radius:4px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;line-height:1.6;color:#9A7F87;background:#fff;padding:8px;font-weight:700}
+.hashtag{display:inline-block;font-weight:700;color:var(--rose);background:rgba(179,50,95,.08);border-radius:999px;padding:8px 18px;font-size:15px;margin:6px 0 14px}
+@media(min-width:768px){.live-grid{grid-template-columns:1fr 1fr}}
 
 /* recruit bits */
 .washi{background:radial-gradient(900px 500px at 90% -10%,rgba(217,200,192,.4),transparent 60%),
@@ -544,19 +561,34 @@ footer .sm{font-size:12px;color:rgba(247,243,236,.5);margin-top:14px;line-height
     </div>
   </section>
 
-  <section class="sec park-band" id="p-morning">
+  <section class="sec park-band" id="p-countdown">
     <div class="wrap">
-      <p class="sec-label rv">Morning Prep</p>
-      <h2 class="sec-title rv">朝9時から。開園前に、仕上げて出発。</h2>
-      <p class="big-time rv">AM 9:00</p>
-      <p class="sec-lead rv" style="margin-top:10px">OPEN|朝10時前のご予約も受付OK(完全予約制)。烏丸御池からひと足のばして、仕上がったその足でパークへ。</p>
+      <p class="sec-label rv">Countdown</p>
+      <h2 class="sec-title rv">パークの日から逆算する、準備ごよみ。</h2>
+      <p class="sec-lead rv">京都から出かけるなら、当日の朝はできるだけ身軽に。ALVELLAは「前日までに整えて、当日は自分で再現できる」逆算の準備をおすすめしています。</p>
       <div class="tl rv">
-        <div><p class="t">9:00</p><div><h3>ALVELLAへ</h3><p>半個室でスタイリング。今日の服と行き先に合わせて、崩れにくい仕上げに。</p></div></div>
-        <div><p class="t">10:00</p><div><h3>仕上がって出発</h3><p>鏡の前で最終チェック。とびきりの髪で、電車に乗り込む。</p></div></div>
-        <div><p class="t">昼</p><div><h3>パークで思いっきり</h3><p>アトラクションも、パレードも、写真も。風に揺れても、直しやすいスタイル。</p></div></div>
-        <div><p class="t">夜</p><div><h3>夜景と、締めの一枚</h3><p>ライトアップの前で、今日いちばんの一枚を。髪はまだ、ちゃんと味方。</p></div></div>
+        <div><p class="t">2週間前〜</p><div><h3>カラー・髪質ケアはこの時期に</h3><p>色と質感が自然に落ち着いて、パーク当日にいちばん綺麗な状態になるように逆算します。</p></div></div>
+        <div><p class="t">前日まで</p><div><h3>似合わせカット+仕上げの設計</h3><p>当日の服・小物・行き先を伺って、朝5分で再現できるスタイルとコツをお伝えします。</p></div></div>
+        <div><p class="t">当日の朝</p><div><h3>自宅で再現して、出発</h3><p>教わったコツでさっと仕上げて、朝の電車へ。午後入園や前泊の日は、朝9:00からのセット相談もできます。</p></div></div>
+        <div><p class="t">パークで</p><div><h3>直しながら、夜まで楽しむ</h3><p>ピンと携帯スタイリング剤で、夜の写真までキープ。直し方は仕上げのときにお教えします。</p></div></div>
       </div>
-      <p class="note" style="color:rgba(255,255,255,.72)">※スタイリング(ヘアセット)のご予約は、InstagramのDMまたはお電話でご相談ください。日程・内容によっては承れない場合があります。</p>
+      <p class="note" style="color:rgba(255,255,255,.72)">※遠方のパークへは移動時間を考えて前日までのご来店がおすすめです。ヘアセットは通常メニュー外のため、日程が決まったらInstagramのDMまたはお電話でご相談ください。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="p-live">
+    <div class="wrap">
+      <p class="sec-label rv">Live Park Info</p>
+      <h2 class="sec-title rv">出発前に、パークの「今」を。</h2>
+      <p class="sec-lead rv">このページを、パークへ行く日の情報基地に。以下の情報をこのページで見られるように、順次準備を進めています。</p>
+      <div class="live-grid rv">
+        <!-- TODO: API連携の実装枠。各widgetの中身をJSで差し込む(待ち時間・天気・スケジュールの公開データ/自前更新) -->
+        <div class="widget"><span class="soon-pill">準備中</span><div class="w-head"><span class="w-ic">⏱</span><h3>アトラクション待ち時間</h3></div><p>主要アトラクションの現在の待ち時間を一覧で。</p><div class="skel"></div><div class="skel s2"></div><div class="skel s3"></div></div>
+        <div class="widget"><span class="soon-pill">準備中</span><div class="w-head"><span class="w-ic">☀</span><h3>当日の天気と湿気</h3></div><p>天気予報に「髪の広がり注意報」を添えて。雨・風・湿気の日の対策つき。</p><div class="skel"></div><div class="skel s2"></div></div>
+        <div class="widget"><span class="soon-pill">準備中</span><div class="w-head"><span class="w-ic">🎆</span><h3>ショー・パレード予定</h3></div><p>その日のショースケジュールをひと目で。逆算して周り方を決められます。</p><div class="skel"></div><div class="skel s2"></div><div class="skel s3"></div></div>
+        <div class="widget"><span class="soon-pill">執筆中</span><div class="w-head"><span class="w-ic">🗺</span><h3>スタッフ監修・モデルコース</h3></div><p>「写真をたくさん撮りたい日」「アトラクション優先の日」など、目的別の理想の周り方ガイド。</p><div class="skel"></div><div class="skel s2"></div></div>
+      </div>
+      <p class="note">※連携機能は開発中です。公開までは各パークの公式アプリをご活用ください。</p>
     </div>
   </section>
 
@@ -575,7 +607,22 @@ footer .sm{font-size:12px;color:rgba(247,243,236,.5);margin-top:14px;line-height
     </div>
   </section>
 
-  <section class="sec" id="p-keep">
+  <section class="sec" id="p-tips">
+    <div class="wrap">
+      <p class="sec-label rv">Park Tips</p>
+      <h2 class="sec-title rv">スタッフの、パーク小技帖。</h2>
+      <p class="sec-lead rv">髪のプロだから知っている、パークの一日をもっと楽しむための小さなコツ。スタッフが不定期で書き足していきます。</p>
+      <div class="stack c2 rv">
+        <div class="idea"><p class="no">TIPS 01</p><h3>お気に入りの一枚は、午前中に</h3><p>髪がいちばん綺麗なのは午前中。「絶対に残したい写真」は、入園して早めの時間に撮っておくのがおすすめです。</p><span class="for">写真重視の日に</span></div>
+        <div class="idea"><p class="no">TIPS 02</p><h3>湿気の日は、出発前にオイルを少量</h3><p>毛先を中心にヘアオイルをなじませておくと、広がりにくく艶もキープ。つけすぎは重くなるので米粒2つ分から。</p><span class="for">雨・湿気予報の日に</span></div>
+        <div class="idea"><p class="no">TIPS 03</p><h3>カチューシャは「買ってすぐ着けない」</h3><p>前髪と耳まわりを整えてから着けると仕上がりが段違い。着ける位置は写真を撮って確認するのが確実です。</p><span class="for">現地で小物を買う日に</span></div>
+        <div class="idea"><p class="no">TIPS 04</p><h3>夜の写真は、結び直してから</h3><p>ライトアップの前に一度手直しを。ゴムとピンを2〜3本持っておくと、夜の一枚がきれいに決まります。</p><span class="for">閉園まで楽しむ日に</span></div>
+      </div>
+      <p class="note">次の小技はInstagramのストーリーでも発信します → <a href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener" style="color:var(--accent-dp);font-weight:700">@alvella_official</a></p>
+    </div>
+  </section>
+
+  <section class="sec" id="p-keep" style="background:var(--paper-2)">
     <div class="wrap">
       <div class="split">
         <div class="figure rv" style="margin-bottom:20px"><img src="assets/styling.jpg" alt="仕上げの施術風景" loading="lazy" width="1156" height="648"></div>
@@ -603,6 +650,29 @@ footer .sm{font-size:12px;color:rgba(247,243,236,.5);margin-top:14px;line-height
         <div>携帯スタイリング剤<small>ミニサイズで十分</small></div>
         <div>ヘアクリップ<small>食事中にさっと</small></div>
         <div>手鏡<small>並ぶ間にチェック</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="p-ugc">
+    <div class="wrap">
+      <p class="sec-label rv">Park Report</p>
+      <h2 class="sec-title rv">みんなの、パークレポート。</h2>
+      <p class="sec-lead rv">ALVELLAで仕上げてパークへ出かけたら、ハッシュタグを付けて投稿してください。素敵な投稿は(許可をいただいたうえで)このページでご紹介していきます。</p>
+      <div class="rv" style="text-align:center">
+        <span class="hashtag">#アルベラでパーク準備</span>
+        <!-- TODO: ハッシュタグの正式名称はサロンと相談して確定する -->
+      </div>
+      <div class="ugc-grid rv">
+        <div class="ugc">あなたの<br>一枚を<br>ここに</div>
+        <div class="ugc">COMING<br>SOON</div>
+        <div class="ugc">パークの<br>とびきりの<br>笑顔を</div>
+        <div class="ugc">COMING<br>SOON</div>
+        <div class="ugc">後ろ姿の<br>ヘアも<br>ぜひ</div>
+        <div class="ugc">COMING<br>SOON</div>
+      </div>
+      <div class="btn-row rv" style="margin-top:20px">
+        <a class="btn btn-fill" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">Instagramで投稿を見る</a>
       </div>
     </div>
   </section>
@@ -894,9 +964,12 @@ footer .sm{font-size:12px;color:rgba(247,243,236,.5);margin-top:14px;line-height
     <a href="#s-gallery" data-go="salon">ギャラリー</a>
     <a href="#s-access" data-go="salon">店舗情報・アクセス</a>
     <h2>PARK — パーク前ヘア</h2>
-    <a href="#p-morning" data-go="park">朝9時からの過ごし方</a>
+    <a href="#p-countdown" data-go="park">準備ごよみ(逆算スケジュール)</a>
+    <a href="#p-live" data-go="park">ライブ・パーク情報(準備中)</a>
     <a href="#p-ideas" data-go="park">スタイルのアイデア</a>
+    <a href="#p-tips" data-go="park">スタッフの小技帖</a>
     <a href="#p-packing" data-go="park">持ち物メモ</a>
+    <a href="#p-ugc" data-go="park">みんなのパークレポート</a>
     <a href="#p-quiz" data-go="park">ものがたり検定</a>
     <h2>RECRUIT — 採用</h2>
     <a href="#r-numbers" data-go="recruit">数字で見る働き方</a>
