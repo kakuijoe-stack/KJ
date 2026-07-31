@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スタバ ドリンクルーレット</title>
+<style>
+  :root {
+    --green: #00704a;
+    --green-dark: #004d33;
+    --cream: #f7f3ec;
+    --brown: #4a3728;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 55%, #1e8a63 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--cream);
+    padding: 24px 16px 48px;
+  }
+  h1 {
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .subtitle {
+    opacity: 0.85;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .wheel-wrap {
+    position: relative;
+    width: min(86vw, 420px);
+    height: min(86vw, 420px);
+  }
+  .pointer {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 28px solid #ffd54f;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+    z-index: 10;
+  }
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35), inset 0 0 0 6px rgba(255,255,255,0.15);
+  }
+  .hub {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18%; height: 18%;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    z-index: 5;
+    user-select: none;
+  }
+  button.spin {
+    margin-top: 28px;
+    padding: 14px 52px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: var(--green-dark);
+    background: #ffd54f;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #c9a227, 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  button.spin:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #c9a227, 0 3px 8px rgba(0,0,0,0.3);
+  }
+  button.spin:disabled { opacity: 0.55; cursor: default; }
+  .result {
+    margin-top: 28px;
+    width: min(92vw, 460px);
+    background: var(--cream);
+    color: var(--brown);
+    border-radius: 20px;
+    padding: 24px 22px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+    transition: opacity 0.4s, transform 0.4s;
+    pointer-events: none;
+  }
+  .result.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  .result .emoji { font-size: 3rem; }
+  .result h2 {
+    font-size: 1.4rem;
+    margin: 8px 0 2px;
+    color: var(--green-dark);
+  }
+  .result .en {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .result .custom {
+    background: #fff;
+    border: 2px dashed var(--green);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .result .custom .label {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .result .comment {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
+  footer {
+    margin-top: 32px;
+    font-size: 0.7rem;
+    opacity: 0.6;
+    text-align: center;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+  <h1>☕ スタバ ドリンクルーレット</h1>
+  <p class="subtitle">今日の一杯は、運命に任せよう。</p>
+
+  <div class="wheel-wrap">
+    <div class="pointer"></div>
+    <canvas id="wheel" width="840" height="840"></canvas>
+    <div class="hub" id="hub">☕</div>
+  </div>
+
+  <button class="spin" id="spinBtn">回す！</button>
+
+  <div class="result" id="result">
+    <div class="emoji" id="rEmoji"></div>
+    <h2 id="rName"></h2>
+    <div class="en" id="rEn"></div>
+    <div class="custom">
+      <span class="label">おすすめカスタム</span>
+      <div id="rCustom"></div>
+    </div>
+    <div class="comment" id="rComment"></div>
+  </div>
+
+  <footer>
+    非公式のファンメイドアプリです。メニュー・カスタムは一例です。<br>
+    実際の提供内容・価格は店舗でご確認ください。
+  </footer>
+
+<script>
+const DRINKS = [
+  { name: "キャラメルマキアート", en: "Caramel Macchiato", emoji: "🍮", color: "#c68e5a",
+    customs: ["キャラメルソース多め", "エスプレッソショット追加", "オーツミルクに変更", "バニラシロップ増量"],
+    comment: "王道の甘さ。頑張った日のご褒美に。" },
+  { name: "抹茶ティーラテ", en: "Matcha Tea Latte", emoji: "🍵", color: "#7aa874",
+    customs: ["抹茶パウダー増量", "シロップ少なめで大人の味", "豆乳に変更", "ホイップ追加"],
+    comment: "ほろ苦い抹茶で、ほっと一息。" },
+  { name: "ドリップコーヒー", en: "Drip Coffee", emoji: "☕", color: "#6b4a2e",
+    customs: ["ミルク追加", "はちみつをひとまわし", "ワンモアコーヒーでおかわり", "そのままブラックで"],
+    comment: "迷ったらこれ。シンプルこそ正義。" },
+  { name: "ソイラテ", en: "Soy Latte", emoji: "🌱", color: "#d9c7a7",
+    customs: ["ヘーゼルナッツシロップ追加", "エキストラホット", "シナモンパウダーをひとふり", "ショット追加"],
+    comment: "やさしい味わいで、体もよろこぶ。" },
+  { name: "ダークモカチップフラペチーノ", en: "Dark Mocha Chip Frappuccino", emoji: "🍫", color: "#5a4038",
+    customs: ["チョコチップ増量", "ホイップ多め", "チョコソース追加", "コーヒー感強めにショット追加"],
+    comment: "ザクザク食感がたまらない一杯。" },
+  { name: "ホワイトモカ", en: "White Mocha", emoji: "🤍", color: "#e8ddca",
+    customs: ["ホイップ増量", "キャラメルソース追加", "アーモンドミルクに変更", "シロップ少なめ"],
+    comment: "まろやかな甘さに癒される。" },
+  { name: "カフェミスト", en: "Caffè Misto", emoji: "🥛", color: "#b08d68",
+    customs: ["フォームミルク多め", "バニラシロップ追加", "はちみつ追加", "カフェインレスに変更"],
+    comment: "カフェオレ派のあなたに。" },
+  { name: "ゆずシトラス&ティー", en: "Yuzu Citrus & Tea", emoji: "🍊", color: "#f0b429",
+    customs: ["ティーバッグ2つで濃いめ", "はちみつ追加", "ホットでじんわり", "アイスでさっぱり"],
+    comment: "爽やかな柑橘でリフレッシュ。" },
+  { name: "キャラメルフラペチーノ", en: "Caramel Frappuccino", emoji: "🍯", color: "#d8a35c",
+    customs: ["キャラメルソース網掛け増量", "エスプレッソショット追加", "ホイップ多め", "ミルクを低脂肪に"],
+    comment: "定番フラペで間違いなし。" },
+  { name: "アールグレイティーラテ", en: "Earl Grey Tea Latte", emoji: "🫖", color: "#9b8aa6",
+    customs: ["ティーバッグ2つで濃いめ", "はちみつ追加", "オーツミルクに変更", "シロップ少なめ"],
+    comment: "ベルガモットの香りで優雅な時間を。" },
+  { name: "アイスシェイクンティー", en: "Iced Shaken Tea", emoji: "🧊", color: "#7fb3c8",
+    customs: ["パッションティーに変更", "シロップ少なめ", "レモネードで割る", "ライトアイス"],
+    comment: "シャカシャカ爽快、夏の相棒。" },
+  { name: "ココア", en: "Hot Chocolate", emoji: "🍪", color: "#8a5a3b",
+    customs: ["ホイップ増量", "チョコソース追加", "エスプレッソショットでカフェモカ風", "豆乳に変更"],
+    comment: "甘党のための、間違いない選択。" },
+];
+
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const N = DRINKS.length;
+const SLICE = (2 * Math.PI) / N;
+const CX = canvas.width / 2, CY = canvas.height / 2, R = canvas.width / 2 - 8;
+
+let rotation = 0;       // current wheel rotation (rad)
+let spinning = false;
+
+function drawWheel(rot) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(CX, CY);
+  ctx.rotate(rot);
+  for (let i = 0; i < N; i++) {
+    const start = i * SLICE - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, R, start, start + SLICE);
+    ctx.closePath();
+    ctx.fillStyle = DRINKS[i].color;
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,0.6)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // emoji + name along the slice
+    ctx.save();
+    ctx.rotate(start + SLICE / 2);
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    ctx.font = "44px serif";
+    ctx.fillText(DRINKS[i].emoji, R - 30, 0);
+    ctx.font = "bold 24px 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif";
+    ctx.fillStyle = luminance(DRINKS[i].color) > 0.55 ? "#3a2a1a" : "#fff";
+    const label = DRINKS[i].name.length > 9 ? DRINKS[i].name.slice(0, 9) + "…" : DRINKS[i].name;
+    ctx.fillText(label, R - 90, 0);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+function luminance(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+}
+
+function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+function spin() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById("spinBtn").disabled = true;
+  document.getElementById("result").classList.remove("show");
+
+  const winner = Math.floor(Math.random() * N);
+  // Rotation that puts the winner's slice center under the top pointer.
+  // Slice i center (at rot=0) sits at angle i*SLICE - PI/2 + SLICE/2 (canvas coords).
+  // Pointer is at -PI/2, so we need rot = -(i*SLICE + SLICE/2), plus extra turns.
+  const target = -(winner * SLICE + SLICE / 2)
+               + (Math.random() * 0.6 - 0.3) * SLICE * 0.8   // land slightly off-center for realism
+               + Math.PI * 2 * (5 + Math.floor(Math.random() * 3));
+  const startRot = rotation % (2 * Math.PI);
+  const delta = target - startRot;
+  const duration = 4200;
+  const t0 = performance.now();
+
+  function frame(now) {
+    const t = Math.min((now - t0) / duration, 1);
+    rotation = startRot + delta * easeOutQuart(t);
+    drawWheel(rotation);
+    if (t < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      spinning = false;
+      document.getElementById("spinBtn").disabled = false;
+      showResult(winner);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function showResult(i) {
+  const d = DRINKS[i];
+  document.getElementById("rEmoji").textContent = d.emoji;
+  document.getElementById("rName").textContent = d.name;
+  document.getElementById("rEn").textContent = d.en;
+  document.getElementById("rCustom").textContent =
+    d.customs[Math.floor(Math.random() * d.customs.length)];
+  document.getElementById("rComment").textContent = d.comment;
+  document.getElementById("result").classList.add("show");
+  document.getElementById("hub").textContent = d.emoji;
+}
+
+document.getElementById("spinBtn").addEventListener("click", spin);
+document.getElementById("hub").addEventListener("click", spin);
+drawWheel(rotation);
+</script>
+</body>
+</html>
