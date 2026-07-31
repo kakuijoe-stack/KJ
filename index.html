@@ -143,8 +143,9 @@ h1 .gold{color:var(--gold-light)}
 
 /* ---------- staff ---------- */
 .staff{background:var(--paper-2)}
-.staff-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px}
-@media(max-width:700px){.staff-grid{grid-template-columns:1fr}}
+.staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.staff-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.staff-grid{grid-template-columns:1fr}}
 .staff-card{background:#fff;border:1px solid rgba(183,151,94,.35);border-radius:2px;overflow:hidden}
 .staff-card .ph{aspect-ratio:4/3;overflow:hidden}
 .staff-card .ph img{width:100%;height:100%;object-fit:cover}
@@ -257,7 +258,7 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
       <div><b>4.9</b>口コミ評価<small>※</small></div>
       <div><b>半個室</b>マンツーマン施術</div>
       <div><b>約1,500名</b>年間ご来店<small>※</small></div>
-      <div><b>徒歩圏内</b>烏丸御池・四条・烏丸</div>
+      <div><b>徒歩6分</b>四条駅・烏丸御池駅</div>
     </div>
   </div>
 </section>
@@ -392,7 +393,7 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
       </details>
       <details>
         <summary>営業時間・定休日を教えてください。</summary>
-        <p class="a">最新の営業時間・空き状況は<a href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">予約ページ</a>でご確認ください。<!-- TODO: 営業時間・定休日が確定したらここと店舗情報・JSON-LDに記載 --></p>
+        <p class="a">営業時間は9:00〜19:00、定休日は毎週月曜日・火曜日です。完全予約制のため、空き状況は<a href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">予約ページ</a>でご確認ください。</p>
       </details>
     </div>
   </div>
@@ -406,26 +407,35 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
     <div class="staff-grid reveal d1">
       <div class="staff-card">
         <div class="ph"><img src="assets/owner.jpg" alt="ALVELLAオーナーの角井竜" loading="lazy" width="679" height="509"></div>
-        <!-- 集合写真(welcome)中央から切り出し。プロ撮影の個人ポートレートが用意でき次第差し替え推奨 -->
+        <!-- 集合写真から切り出し。プロ撮影の個人ポートレートが用意でき次第差し替え推奨 -->
         <div class="body">
-          <p class="role">OWNER / STYLIST</p>
-          <h3>角井 竜</h3>
-          <p>「テーマパークのようなおもてなし」を掲げ、カウンセリングからお見送りまで、一人ひとりの時間をプロデュースします。</p>
+          <p class="role">期待を超えるおもてなしプロデューサー(歴11年)</p>
+          <h3>角井 竜<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">カクイ リュウ</span></h3>
+          <p>【30代】大人可愛いを叶える美髪プロデュース。カウンセリングからお見送りまで、一人ひとりの時間を丁寧に仕立てます。</p>
           <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a></p>
         </div>
       </div>
       <div class="staff-card">
-        <div class="ph"><img src="assets/team.jpg" alt="エントランスに並ぶALVELLAのスタッフたち" loading="lazy" width="1400" height="1050"></div>
+        <div class="ph"><img src="assets/portrait-staff.jpg" alt="ALVELLAスタイリストの澁谷憂樹" loading="lazy" width="960" height="1280"></div>
         <div class="body">
-          <p class="role">ALVELLA TEAM</p>
-          <h3>スタッフ一同</h3>
-          <p>得意分野の違うスタッフが、あなたのお悩みに合わせて向き合います。スタッフ紹介とスタイルはInstagramでも発信中です。</p>
-          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">@alvella_official</a></p>
+          <p class="role">トータルケアコンシェルジュ(歴6年)</p>
+          <h3>澁谷 憂樹<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">シブヤ ユウキ</span></h3>
+          <p>【20代 支持率No.1】丁寧なカウンセリングが好評。艶髪スタイルと髪質改善メニューが得意です。一緒に可愛いを創りましょう。</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">@alvella_yuuki</a></p>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="ph"><img src="assets/giriko.jpg" alt="ALVELLAスタイリストの儀利古真奈" loading="lazy" width="591" height="443"></div>
+        <div class="body">
+          <p class="role">韓国好き美容師(歴5年)</p>
+          <h3>儀利古 真奈<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">ギリコ マナ</span></h3>
+          <p>韓国スタイル・透明感カラーで艶髪づくりが得意。緊張しやすい方にも話していただきやすい空間づくりを大切にしています。</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">@alvella_giriko</a></p>
         </div>
       </div>
     </div>
-    <!-- TODO: スタッフインタビュー動画(girikomanaさん / Shibuya yuukiさん)の30秒抜粋をここにクリック再生で設置(全編は採用サイトへ) -->
-    <p class="staff-note">スタッフの得意分野・個別紹介は順次公開予定です。指名のご相談はDMからどうぞ。</p>
+    <!-- TODO: スタッフインタビュー動画(儀利古さん / 澁谷さん)の30秒抜粋をここにクリック再生で設置(全編は採用サイトへ) -->
+    <p class="staff-note">アシスタント1名も在籍しています。ご指名は<a href="https://beauty.hotpepper.jp/slnH000680090/stylist/" target="_blank" rel="noopener" style="color:var(--gold-deep);font-weight:700">WEB予約のスタイリスト一覧</a>からどうぞ。</p>
   </div>
 </section>
 
@@ -468,9 +478,13 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
         <table>
           <tr><th>店名</th><td>ALVELLA(アルベラ)</td></tr>
           <tr><th>住所</th><td>〒604-8121<br>京都府京都市中京区玉蔵町123<br>グランレブリー室町六角101</td></tr>
-          <tr><th>アクセス</th><td>地下鉄「烏丸御池駅」「四条駅」・阪急「烏丸駅」から徒歩圏内<!-- TODO: 出口番号・徒歩分数を確認して記載 --></td></tr>
+          <tr><th>アクセス</th><td>地下鉄「四条駅」22番出口・「烏丸御池駅」6番出口から徒歩6分</td></tr>
           <tr><th>電話</th><td><a href="tel:07017413841" style="color:var(--gold-deep);font-weight:700">070-1741-3841</a><br><span style="font-size:12px">施術中は出られない場合があります。WEB予約・DMが確実です。</span></td></tr>
-          <tr><th>営業時間</th><td>最新の営業時間・定休日は<a href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener" style="color:var(--gold-deep)">予約ページ</a>でご確認ください<!-- TODO: 確定後に明記し、JSON-LDにも反映 --></td></tr>
+          <tr><th>営業時間</th><td>9:00〜19:00(完全予約制)</td></tr>
+          <tr><th>定休日</th><td>毎週月曜日・火曜日</td></tr>
+          <tr><th>お支払い</th><td>各種クレジットカード(Visa / Mastercard / JCB / AMEX / Diners / 銀聯 / Discover)、PayPay・d払い・楽天ペイ・au PAY・iD・QUICPay</td></tr>
+          <tr><th>駐車場</th><td>店舗の目の前にコインパーキングあり</td></tr>
+          <tr><th>サロン</th><td>セット面4席・半個室あり・禁煙<br>1人のスタイリストが仕上げまで担当します<br><span style="font-size:12px">※ブリーチの施術はお断りする場合があります。ドリンクサービスはケアメニューのお客様が対象です。</span></td></tr>
         </table>
         <a class="btn btn-navy" href="https://www.google.com/maps/search/?api=1&query=ALVELLA+%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%AD%E4%BA%AC%E5%8C%BA%E7%8E%89%E8%94%B5%E7%94%BA123" target="_blank" rel="noopener">Googleマップで開く</a>
         <!-- TODO: 道順動画(最寄駅→ALVELLA)が書き出せたら「動画で道順を見る」ボタンをここに追加 -->
@@ -567,14 +581,24 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
     "streetAddress": "玉蔵町123 グランレブリー室町六角101",
     "addressCountry": "JP"
   },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    }
+  ],
   "sameAs": [
     "https://www.instagram.com/alvella_official/",
     "https://www.instagram.com/alvella_kakui/",
+    "https://www.instagram.com/alvella_yuuki/",
+    "https://www.instagram.com/alvella_giriko/",
     "https://beauty.hotpepper.jp/slnH000680090/"
   ]
 }
 </script>
-<!-- TODO: 営業時間確定後に openingHoursSpecification、住所の緯度経度確認後に geo を追加。独自ドメイン確定後に url を追加 -->
+<!-- TODO: 住所の緯度経度確認後に geo を追加。独自ドメイン確定後に url を追加 -->
 
 <script>
 const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:.15});
