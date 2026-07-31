@@ -2,10 +2,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#0C1E3C">
 <title>ALVELLA(アルベラ)|京都・烏丸御池の髪質改善・ヘッドスパ 半個室サロン</title>
-<meta name="description" content="京都・烏丸御池の半個室サロンALVELLA(アルベラ)。うねり・広がり・ダメージに寄り添う髪質改善メニューと、頭浸浴・ヘッドスパで扱いやすい艶やかな髪へ。口コミ4.9のおもてなしをどうぞ。">
-<!-- TODO: 独自ドメイン確定後、og:url と canonical に絶対URLを設定 -->
+<meta name="description" content="京都・烏丸御池の半個室サロンALVELLA(アルベラ)。うねり・広がり・ダメージに寄り添う髪質改善と、頭浸浴・ヘッドスパ。9:00〜19:00(月・火定休)、四条駅・烏丸御池駅から徒歩6分。">
 <meta property="og:title" content="ALVELLA(アルベラ)|京都・烏丸御池の髪質改善・ヘッドスパ 半個室サロン">
 <meta property="og:description" content="健康的な美しさと、おもてなしの時間を。京都・烏丸御池の4席半個室サロン。">
 <meta property="og:type" content="website">
@@ -16,562 +17,905 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/interior-main.jpg">
 <style>
+/* ============ tokens ============ */
 :root{
-  --navy:#0C1E3C;         /* 店内のネイビー */
-  --navy-deep:#081527;
-  --gold:#B7975E;         /* 金枠ミラーの真鍮 */
-  --gold-light:#E2C88F;
-  --gold-deep:#8A7451;    /* 明るい地の上で使う濃い金(コントラスト確保) */
-  --paper:#F7F3EC;        /* 生成りの紙白 */
-  --paper-2:#FCFAF5;
-  --ink:#232732;
+  --navy:#0C1E3C; --navy-deep:#081527; --gold:#B7975E; --gold-lt:#E2C88F; --gold-dp:#7E6741;
+  --paper:#F7F3EC; --paper-2:#FCFAF5; --ink:#232732; --ink-2:#4C525F;
+  --plum:#4A2056; --rose:#B3325F;
+  --midori:#3E4A3D; --kinari:#F7F4EF;
   --serif:'Shippori Mincho','Hiragino Mincho ProN','Yu Mincho',serif;
   --sans:'Zen Kaku Gothic New','Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+  --accent:var(--gold); --accent-dp:var(--gold-dp); --bar:76px;
 }
+[data-view="park"]{--accent:var(--rose);--accent-dp:#8E2049}
+[data-view="recruit"]{--accent:var(--gold);--accent-dp:var(--gold-dp)}
+
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.9;font-size:16px;letter-spacing:.04em;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--paper);
+  font-size:16px;line-height:1.9;letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-bottom:calc(var(--bar) + env(safe-area-inset-bottom));
+}
 img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-section{padding:100px 0}
-@media(max-width:768px){section{padding:72px 0}}
+a{color:inherit;-webkit-tap-highlight-color:rgba(183,151,94,.2)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
-.sec-label{display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.3em;color:var(--gold-deep);font-weight:700;margin-bottom:16px}
-.sec-label::before{content:"";width:36px;height:1px;background:var(--gold)}
-.sec-title{font-family:var(--serif);font-size:clamp(26px,3.8vw,38px);font-weight:600;letter-spacing:.1em;line-height:1.6;margin-bottom:24px;word-break:keep-all;text-wrap:balance}
-.sec-lead{max-width:660px;color:#4b5160;margin-bottom:44px}
+/* ============ layout ============ */
+.wrap{width:100%;max-width:720px;margin:0 auto;padding:0 20px}
+.sec{padding:56px 0}
+.sec-label{font-size:12px;letter-spacing:.24em;color:var(--accent-dp);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec-label::before{content:"";width:26px;height:1px;background:var(--accent)}
+.sec-title{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.06em;line-height:1.55;margin-bottom:16px;word-break:keep-all;text-wrap:balance}
+.sec-lead{color:var(--ink-2);font-size:15px;margin-bottom:28px}
+p+p{margin-top:1em}
 
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:none}
-.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 32px;border-radius:999px;font-weight:700;font-size:15px;letter-spacing:.08em;text-decoration:none;transition:opacity .25s,transform .25s;cursor:pointer}
-.btn:hover{opacity:.85;transform:translateY(-2px)}
-.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.btn-gold{background:var(--gold);color:#fff}
+/* ============ buttons ============ */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:16px;letter-spacing:.04em;text-decoration:none;text-align:center;transition:opacity .2s}
+.btn:active{opacity:.75}
+.btn-fill{background:var(--accent);color:#fff}
 .btn-navy{background:var(--navy);color:#fff}
-.btn-line{border:1px solid currentColor;background:transparent}
+.btn-line{border:1.5px solid currentColor;background:transparent}
+.btn-row{display:flex;flex-direction:column;gap:12px;margin-top:8px}
 
-/* ---------- header ---------- */
-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(252,250,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(183,151,94,.28)}
-.logo{font-family:var(--serif);font-size:20px;letter-spacing:.3em;font-weight:600;text-decoration:none;color:var(--navy)}
-.logo small{display:block;font-size:9px;letter-spacing:.26em;color:var(--gold-deep);font-family:var(--sans)}
-nav{display:flex;gap:22px;align-items:center}
-nav a.nl{font-size:13px;text-decoration:none;letter-spacing:.08em}
-nav a.nl:hover{color:var(--gold-deep)}
-nav .btn{min-height:40px;padding:6px 20px;font-size:13px}
-@media(max-width:1000px){nav a.nl{display:none}}
+/* ============ header ============ */
+header{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 16px;background:rgba(252,250,245,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(183,151,94,.3)}
+.logo{font-family:var(--serif);font-size:19px;letter-spacing:.26em;font-weight:600;text-decoration:none;color:var(--navy);line-height:1.2}
+.logo small{display:block;font-size:9.5px;letter-spacing:.18em;color:var(--accent-dp);font-family:var(--sans);letter-spacing:.16em}
+.menu-btn{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid rgba(183,151,94,.55);border-radius:999px;background:transparent;font:700 13px/1 var(--sans);color:var(--navy);letter-spacing:.06em;cursor:pointer}
+.menu-btn span{display:block;width:16px;height:9px;position:relative}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:var(--navy)}
+.menu-btn span::before{top:0}.menu-btn span::after{bottom:0}
 
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;padding:0}
+/* ============ sheet menu ============ */
+.sheet{position:fixed;inset:0;z-index:200;display:none}
+.sheet.open{display:block}
+.sheet-bg{position:absolute;inset:0;background:rgba(8,21,39,.55)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-height:86vh;overflow-y:auto;background:var(--paper-2);
+  border-radius:18px 18px 0 0;padding:10px 20px calc(28px + env(safe-area-inset-bottom));
+  animation:up .28s cubic-bezier(.2,.8,.3,1)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.sheet-grip{width:40px;height:4px;border-radius:99px;background:rgba(35,39,50,.22);margin:8px auto 16px}
+.sheet h2{font-family:var(--serif);font-size:15px;letter-spacing:.2em;color:var(--accent-dp);margin:20px 0 6px;font-weight:600}
+.sheet h2:first-of-type{margin-top:4px}
+.sheet a{display:flex;align-items:center;justify-content:space-between;min-height:50px;padding:6px 4px;text-decoration:none;font-size:16px;border-bottom:1px solid rgba(183,151,94,.28)}
+.sheet a::after{content:"›";color:var(--accent-dp);font-size:20px}
+.sheet .close{display:block;width:100%;min-height:52px;margin-top:22px;border:none;border-radius:999px;background:var(--navy);color:#fff;font:700 15px var(--sans);cursor:pointer}
+
+/* ============ bottom tab bar ============ */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:150;display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(252,250,245,.97);backdrop-filter:blur(10px);border-top:1px solid rgba(183,151,94,.4);
+  padding-bottom:env(safe-area-inset-bottom)}
+.tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:var(--bar);
+  text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.02em;color:#7C8291;position:relative}
+.tabbar a i{font-style:normal;font-size:17px;line-height:1}
+.tabbar a.on{color:var(--navy)}
+.tabbar a.on::before{content:"";position:absolute;top:0;left:22%;right:22%;height:2.5px;background:var(--accent);border-radius:0 0 3px 3px}
+.tabbar a.cta{background:var(--accent);color:#fff}
+.tabbar a.cta i{font-size:16px}
+
+/* ============ views ============ */
+.view{display:none}
+.view.on{display:block}
+
+/* ============ hero ============ */
+.hero{position:relative;min-height:78svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
 .hero .bg{position:absolute;inset:0}
-.hero .bg img{width:100%;height:100%;object-fit:cover}
-.hero .bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-@media(prefers-reduced-motion:reduce){.hero .bg video{display:none}}
-.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(15deg,rgba(8,21,39,.86) 25%,rgba(8,21,39,.35) 60%,rgba(8,21,39,.15))}
-.hero-inner{position:relative;width:100%;padding:140px 24px 110px}
-.hero-eyebrow{font-size:12px;letter-spacing:.28em;color:var(--gold-light);font-weight:700;margin-bottom:22px;display:flex;align-items:center;gap:14px}
-.hero-eyebrow::before{content:"";width:44px;height:1px;background:var(--gold-light)}
-h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,52px);line-height:1.6;letter-spacing:.08em;margin-bottom:20px;word-break:keep-all;text-wrap:balance}
-h1 .gold{color:var(--gold-light)}
-.hero-sub{font-size:clamp(14px,1.5vw,16px);color:rgba(255,255,255,.88);max-width:540px;margin-bottom:34px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-.hero-badges{display:flex;gap:26px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid rgba(226,200,143,.4)}
-.hero-badges div{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.85)}
-.hero-badges b{display:block;font-family:var(--serif);font-size:22px;color:var(--gold-light);letter-spacing:.08em}
-.hero-badges small{font-size:10px;color:rgba(255,255,255,.6)}
-@media(max-width:480px){.hero-cta{flex-direction:column}.hero-cta .btn{width:100%}}
+.hero .bg img,.hero .bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(8,21,39,.92) 8%,rgba(8,21,39,.55) 48%,rgba(8,21,39,.25))}
+[data-view="park"] .hero .bg::after{background:linear-gradient(0deg,rgba(46,16,54,.92) 8%,rgba(120,32,74,.5) 48%,rgba(46,16,54,.2))}
+.hero-in{position:relative;width:100%;padding:96px 20px 40px}
+.hero .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--gold-lt);font-weight:700;margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.6;letter-spacing:.05em;margin-bottom:14px;word-break:keep-all;text-wrap:balance}
+.hero h1 .g{color:var(--gold-lt)}
+.hero .sub{font-size:15px;color:rgba(255,255,255,.9);margin-bottom:24px}
+.badges{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 10px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(226,200,143,.4)}
+.badges div{font-size:12px;color:rgba(255,255,255,.82);line-height:1.5}
+.badges b{display:block;font-family:var(--serif);font-size:20px;color:var(--gold-lt);letter-spacing:.04em;font-weight:600}
 
-/* ---------- concept ---------- */
-.concept-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
-@media(max-width:820px){.concept-inner{grid-template-columns:1fr;gap:32px}}
-.concept-visual{border-radius:2px;overflow:hidden;border:1px solid rgba(183,151,94,.35)}
-.concept p{color:#4b5160;margin-bottom:1.3em}
+/* ============ cards / blocks ============ */
+.card{background:#fff;border:1px solid rgba(183,151,94,.38);border-radius:4px;padding:20px 18px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.figure{border-radius:4px;overflow:hidden;border:1px solid rgba(183,151,94,.35)}
+.figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
 
-/* ---------- menu ---------- */
-.menu{background:var(--paper-2)}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
-@media(max-width:900px){.menu-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.menu-grid{grid-template-columns:1fr}}
-.menu-card{background:#fff;border:1px solid rgba(183,151,94,.35);border-radius:2px;padding:26px 24px;display:flex;flex-direction:column;gap:10px}
-.menu-card .for{font-size:11px;letter-spacing:.06em;color:var(--gold-deep);font-weight:700}
-.menu-card h3{font-family:var(--serif);font-size:19px;letter-spacing:.06em;font-weight:600;color:var(--navy)}
-.menu-card p{font-size:13px;color:#565c69;flex:1}
-.menu-card .price{font-family:var(--serif);font-size:22px;color:var(--navy);border-top:1px solid rgba(183,151,94,.3);padding-top:12px}
-.menu-card .price small{font-size:11px;font-family:var(--sans);color:#7a7f8b;margin-left:8px}
-.menu-note{font-size:12px;color:#6d7280;margin-top:22px}
-.menu-cta{margin-top:28px}
+.menu-card .for{font-size:12.5px;color:var(--accent-dp);font-weight:700;margin-bottom:4px}
+.menu-card h3{font-family:var(--serif);font-size:20px;letter-spacing:.04em;color:var(--navy);font-weight:600}
+.menu-card p{font-size:14.5px;color:var(--ink-2);margin:6px 0 12px}
+.menu-card .price{font-family:var(--serif);font-size:23px;color:var(--navy);border-top:1px solid rgba(183,151,94,.32);padding-top:10px}
+.menu-card .price small{font-size:12.5px;font-family:var(--sans);color:#6E7482;margin-left:6px}
+.note{font-size:13px;color:#6E7482;margin-top:16px}
 
-/* ---------- specialty (髪質改善/ヘッドスパ) ---------- */
-.spec{background:var(--navy);color:var(--paper)}
-.spec .sec-label{color:var(--gold-light)}
-.spec .sec-label::before{background:var(--gold-light)}
-.spec .sec-title{color:#fff}
-.spec .sec-lead{color:rgba(247,243,236,.75)}
-.spec-block{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:44px 0;border-top:1px solid rgba(183,151,94,.35)}
-.spec-block:first-of-type{border-top:none}
-@media(max-width:820px){.spec-block{grid-template-columns:1fr;gap:26px}}
-.spec-block.rev .spec-visual{order:2}
-@media(max-width:820px){.spec-block.rev .spec-visual{order:0}}
-.spec-visual{border-radius:2px;overflow:hidden;border:1px solid rgba(183,151,94,.4)}
-.spec-visual img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
-.spa-video{max-width:420px;margin:0 auto}
+/* dark blocks */
+.dark{background:var(--navy);color:var(--paper)}
+.dark .sec-label{color:var(--gold-lt)}
+.dark .sec-label::before{background:var(--gold-lt)}
+.dark .sec-title{color:#fff}
+.dark .sec-lead{color:rgba(247,243,236,.8)}
+.dark h3{font-family:var(--serif);font-size:21px;letter-spacing:.05em;font-weight:600;color:#fff;margin-bottom:10px}
+.dark p{font-size:14.5px;color:rgba(247,243,236,.86)}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 12px}
+.tags span{font-size:12px;padding:4px 12px;border-radius:999px;border:1px solid var(--gold-lt);color:var(--gold-lt)}
+.steps-ol{list-style:none;margin-top:14px}
+.steps-ol li{display:flex;gap:12px;padding:9px 0;border-top:1px dashed rgba(183,151,94,.4);font-size:14px;color:rgba(247,243,236,.86)}
+.steps-ol b{font-family:var(--serif);color:var(--gold-lt);min-width:52px;letter-spacing:.06em}
+.spa-video{max-width:340px;margin:0 auto;border-radius:4px;overflow:hidden;border:1px solid rgba(183,151,94,.4)}
 .spa-video video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
-@media(prefers-reduced-motion:reduce){.spa-video video{display:none}.spa-video{background:url("assets/headspa.jpg") center/cover;aspect-ratio:9/16}}
-.spec h3{font-family:var(--serif);font-size:clamp(21px,2.4vw,26px);letter-spacing:.08em;font-weight:600;margin-bottom:14px;color:#fff;word-break:keep-all}
-.spec-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.spec-tags span{font-size:11px;padding:4px 13px;border-radius:999px;border:1px solid var(--gold-light);color:var(--gold-light)}
-.spec p{font-size:14px;color:rgba(247,243,236,.85)}
-.spec ol{list-style:none;margin-top:18px}
-.spec ol li{display:flex;gap:14px;padding:10px 0;border-top:1px dashed rgba(183,151,94,.4);font-size:13px;color:rgba(247,243,236,.85)}
-.spec ol b{font-family:var(--serif);color:var(--gold-light);min-width:56px;letter-spacing:.1em}
 
-/* ---------- first visit ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:40px 0 34px}
-@media(max-width:700px){.steps{grid-template-columns:1fr}}
-.step{background:#fff;border:1px solid rgba(183,151,94,.35);border-radius:2px;padding:26px 22px}
-.step b{font-family:var(--serif);font-size:13px;letter-spacing:.25em;color:var(--gold-deep)}
-.step h3{font-family:var(--serif);font-size:18px;letter-spacing:.08em;margin:8px 0 8px;font-weight:600;color:var(--navy)}
-.step p{font-size:13px;color:#565c69}
-.faq details{background:#fff;border:1px solid rgba(183,151,94,.35);border-radius:2px;margin-bottom:10px}
-.faq summary{list-style:none;cursor:pointer;padding:18px 52px 18px 22px;position:relative;font-weight:700;font-size:14px}
+/* steps */
+.step{background:#fff;border:1px solid rgba(183,151,94,.38);border-radius:4px;padding:18px}
+.step b{font-family:var(--serif);font-size:12.5px;letter-spacing:.2em;color:var(--accent-dp)}
+.step h3{font-family:var(--serif);font-size:19px;letter-spacing:.05em;margin:6px 0;font-weight:600;color:var(--navy)}
+.step p{font-size:14.5px;color:var(--ink-2)}
+
+/* faq */
+.faq details{background:#fff;border:1px solid rgba(183,151,94,.38);border-radius:4px;margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;padding:16px 46px 16px 18px;position:relative;font-weight:700;font-size:15.5px;line-height:1.65;min-height:56px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:"Q.";font-family:var(--serif);color:var(--gold-deep);margin-right:10px}
-.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:20px;color:var(--gold-deep);transition:transform .3s}
-.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq .a{padding:0 22px 20px;font-size:13px;color:#4b5160}
-.faq .a::before{content:"A.";font-family:var(--serif);color:var(--navy);margin-right:10px}
+.faq summary::before{content:"Q.";font-family:var(--serif);color:var(--accent-dp);margin-right:8px}
+.faq summary::after{content:"+";position:absolute;right:18px;top:18px;font-family:var(--serif);font-size:22px;color:var(--accent-dp);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 18px 18px;font-size:14.5px;color:var(--ink-2)}
+.faq .a::before{content:"A.";font-family:var(--serif);color:var(--navy);margin-right:8px}
 
-/* ---------- staff ---------- */
-.staff{background:var(--paper-2)}
-.staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:900px){.staff-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.staff-grid{grid-template-columns:1fr}}
-.staff-card{background:#fff;border:1px solid rgba(183,151,94,.35);border-radius:2px;overflow:hidden}
-.staff-card .ph{aspect-ratio:4/3;overflow:hidden}
-.staff-card .ph img{width:100%;height:100%;object-fit:cover}
-.staff-card .body{padding:22px 24px 26px}
-.staff-card h3{font-family:var(--serif);font-size:19px;letter-spacing:.14em;font-weight:600;color:var(--navy)}
-.staff-card .role{font-size:11px;letter-spacing:.1em;color:var(--gold-deep);margin-bottom:8px}
-.staff-card p{font-size:13px;color:#565c69}
-.staff-card a{font-size:12px;font-weight:700;color:var(--gold-deep);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px}
-.staff-note{font-size:12px;color:#6d7280;margin-top:20px}
+/* people */
+.person{background:#fff;border:1px solid rgba(183,151,94,.38);border-radius:4px;overflow:hidden}
+.person .ph{aspect-ratio:4/3;overflow:hidden}
+.person .ph img{width:100%;height:100%;object-fit:cover}
+.person .body{padding:16px 18px 20px}
+.person .role{font-size:12.5px;color:var(--accent-dp);font-weight:700;margin-bottom:4px}
+.person h3{font-family:var(--serif);font-size:21px;letter-spacing:.1em;font-weight:600;color:var(--navy)}
+.person h3 small{font-size:12px;letter-spacing:.06em;color:#7C8291;margin-left:8px;font-family:var(--sans)}
+.person p{font-size:14.5px;color:var(--ink-2);margin-top:8px}
+.person .ig{display:inline-block;margin-top:10px;padding:8px 0;font-size:13.5px;font-weight:700;color:var(--accent-dp);text-decoration:none;border-bottom:1px solid var(--accent)}
 
-/* ---------- gallery ---------- */
-.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:700px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
-.gal-grid figure{margin:0;overflow:hidden;border-radius:2px;position:relative;aspect-ratio:4/3;border:1px solid rgba(183,151,94,.3)}
-.gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.gal-grid figure:hover img{transform:scale(1.04)}
-.gal-coming{display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(150deg,#EDE6D9,#DCD2BF);color:var(--gold-deep);font-size:12px;letter-spacing:.1em;line-height:2;text-decoration:none;font-weight:700}
-.gal-note{font-size:12px;color:#6d7280;margin-top:18px}
+/* gallery */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2 figure{margin:0;border-radius:4px;overflow:hidden;border:1px solid rgba(183,151,94,.32);aspect-ratio:4/3;position:relative}
+.grid2 img{width:100%;height:100%;object-fit:cover}
+.grid2 figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 7px;font-size:12px;color:#fff;
+  background:linear-gradient(transparent,rgba(20,24,34,.8));line-height:1.4}
+.soon{display:flex;align-items:center;justify-content:center;text-align:center;font-size:12.5px;font-weight:700;
+  color:var(--accent-dp);background:linear-gradient(150deg,#EDE6D9,#DCD2BF);line-height:1.8;text-decoration:none;padding:10px}
 
-/* ---------- voice ---------- */
-.voice{background:var(--paper-2);text-align:center}
-.voice .score{font-family:var(--serif);font-size:64px;color:var(--navy);line-height:1.2}
-.voice .score small{font-size:16px;color:var(--gold-deep)}
-.voice p{max-width:560px;margin:12px auto 30px;color:#4b5160;font-size:14px}
+/* reviews */
+.score{font-family:var(--serif);font-size:60px;color:var(--navy);line-height:1.1;text-align:center}
+.score small{font-size:16px;color:var(--accent-dp)}
 
-/* ---------- access ---------- */
-.access-inner{display:grid;grid-template-columns:1fr 1fr;gap:52px}
-@media(max-width:820px){.access-inner{grid-template-columns:1fr;gap:30px}}
-.access table{width:100%;border-collapse:collapse;font-size:14px}
-.access th{font-family:var(--serif);text-align:left;padding:14px 14px 14px 0;color:var(--navy);white-space:nowrap;vertical-align:top;letter-spacing:.1em;font-weight:600;border-bottom:1px solid rgba(183,151,94,.3);width:110px}
-.access td{padding:14px 0;border-bottom:1px solid rgba(183,151,94,.3);color:#4b5160}
-.access-visual{border-radius:2px;overflow:hidden;border:1px solid rgba(183,151,94,.35)}
-.access-visual img{width:100%;height:100%;object-fit:cover}
-.access .btn{margin-top:22px}
+/* table */
+.table{width:100%;border-collapse:collapse;font-size:14.5px;background:#fff;border:1px solid rgba(183,151,94,.38);border-radius:4px;overflow:hidden}
+.table th,.table td{display:block;width:100%;text-align:left}
+.table th{font-family:var(--serif);font-weight:600;letter-spacing:.08em;color:var(--navy);background:rgba(183,151,94,.1);padding:9px 16px 7px;font-size:14px}
+.table td{padding:10px 16px 16px;color:var(--ink-2);border-bottom:1px solid rgba(183,151,94,.25)}
+.table tr:last-child td{border-bottom:none}
+.table .hl{color:var(--accent-dp);font-weight:700}
 
-/* ---------- annex banners ---------- */
-.annex{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:760px){.annex{grid-template-columns:1fr}}
-.annex a{position:relative;display:flex;align-items:flex-end;min-height:230px;border-radius:2px;overflow:hidden;color:#fff;text-decoration:none;padding:24px}
-.annex a::before{content:"";position:absolute;inset:0;background:linear-gradient(10deg,rgba(8,21,39,.85),rgba(8,21,39,.15))}
-.annex a.park::before{background:linear-gradient(10deg,rgba(74,32,86,.85),rgba(200,61,115,.18))}
-.annex img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-.annex a{isolation:isolate}
-.annex div{position:relative}
-.annex span{font-size:10px;letter-spacing:.24em;color:var(--gold-light);font-weight:700}
-.annex h3{font-family:var(--serif);font-size:22px;letter-spacing:.1em;font-weight:600;margin:8px 0 4px}
-.annex p{font-size:12px;color:rgba(255,255,255,.85)}
+/* numbers */
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(183,151,94,.4);border:1px solid rgba(183,151,94,.4)}
+.nums div{background:var(--midori);padding:18px 12px;text-align:center}
+.nums .l{font-size:11.5px;letter-spacing:.1em;color:rgba(247,244,239,.8);margin-bottom:4px}
+.nums .v{font-family:var(--serif);font-size:19px;color:#fff;line-height:1.35}
+.nums .v b{font-size:29px;color:var(--gold-lt);font-weight:600}
+.nums .n{font-size:12px;color:rgba(247,244,239,.62);margin-top:4px;line-height:1.4}
 
-/* ---------- reserve ---------- */
-.reserve{background:var(--navy-deep);color:var(--paper)}
-.reserve .sec-title{color:#fff;text-align:center}
-.reserve .sec-lead{text-align:center;margin-left:auto;margin-right:auto;color:rgba(247,243,236,.8)}
-.res-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:820px){.res-cards{grid-template-columns:1fr}}
-.res-card{background:rgba(252,250,245,.05);border:1px solid rgba(183,151,94,.45);border-radius:2px;padding:30px 24px;text-align:center;display:flex;flex-direction:column;gap:12px}
-.res-card .tag{font-size:10px;letter-spacing:.24em;color:var(--gold-light);font-weight:700}
-.res-card h3{font-family:var(--serif);font-size:19px;letter-spacing:.1em;font-weight:600;color:#fff}
-.res-card p{font-size:12px;color:rgba(247,243,236,.75);flex:1}
-.res-card .btn{width:100%}
-.res-card .btn-line{color:var(--gold-light);border-color:var(--gold-light)}
+/* timeline */
+.tl div{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(183,151,94,.5)}
+.tl div:last-child{border-bottom:none}
+.tl .t{font-family:var(--serif);font-size:15px;letter-spacing:.06em;color:var(--accent-dp);font-weight:600}
+.tl h3{font-size:15px;font-weight:700;margin-bottom:2px}
+.tl p{font-size:14px;color:var(--ink-2)}
 
-/* ---------- footer ---------- */
-footer{background:#050F1E;color:rgba(247,243,236,.72);padding:46px 24px 110px;text-align:center;font-size:12px;letter-spacing:.05em}
-footer .flogo{font-family:var(--serif);font-size:22px;letter-spacing:.4em;color:#fff;margin-bottom:14px}
-footer .flinks{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-footer .flinks a{color:rgba(247,243,236,.8);text-decoration:none}
-footer .flinks a:hover{color:var(--gold-light)}
-footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
+/* park bits */
+.park-band{background:linear-gradient(150deg,var(--plum),var(--rose));color:#fff}
+.park-band .sec-label{color:var(--gold-lt)}
+.park-band .sec-label::before{background:var(--gold-lt)}
+.park-band .sec-title{color:#fff}
+.park-band .sec-lead,.park-band p{color:rgba(255,255,255,.88)}
+.park-band .tl div{border-color:rgba(255,255,255,.3)}
+.park-band .tl .t{color:var(--gold-lt)}
+.big-time{font-family:var(--serif);font-size:44px;color:var(--gold-lt);letter-spacing:.04em;font-weight:600;line-height:1.1}
+.idea{background:#fff;border:1px solid rgba(183,151,94,.4);border-radius:4px;padding:18px}
+.idea .no{font-family:var(--serif);font-size:12.5px;letter-spacing:.16em;color:var(--accent-dp);font-weight:600}
+.idea h3{font-family:var(--serif);font-size:19px;color:var(--plum);margin:6px 0;font-weight:600}
+.idea p{font-size:14.5px;color:var(--ink-2)}
+.idea .for{display:inline-block;font-size:12px;color:var(--rose);border:1px solid rgba(179,50,95,.45);border-radius:999px;padding:3px 12px;margin-top:10px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.checks div{border:1px solid rgba(183,151,94,.4);border-radius:4px;padding:12px 14px;background:#fff;font-size:14px;font-weight:700;color:var(--plum)}
+.checks div::before{content:"✓";color:var(--rose);margin-right:7px}
+.checks small{display:block;font-weight:400;font-size:12px;color:#6E7482;margin-top:2px}
+.quiz-band{background:linear-gradient(150deg,#38143F,#6E2A57);color:#fff}
+.quiz-band .sec-label{color:var(--gold-lt)}
+.quiz-band .sec-label::before{background:var(--gold-lt)}
+.quiz-band .sec-title{color:#fff}
+.quiz-band .sec-lead{color:rgba(255,255,255,.86)}
+.quiz-band details{background:rgba(255,255,255,.1);border:1px solid rgba(226,200,143,.45);border-radius:4px;margin-bottom:10px}
+.quiz-band summary{list-style:none;cursor:pointer;padding:16px 44px 16px 18px;position:relative;font-weight:700;font-size:15px;line-height:1.7}
+.quiz-band summary::-webkit-details-marker{display:none}
+.quiz-band summary::after{content:"+";position:absolute;right:18px;top:16px;font-family:var(--serif);font-size:21px;color:var(--gold-lt);transition:transform .25s}
+.quiz-band details[open] summary::after{transform:rotate(45deg)}
+.quiz-band .qno{font-family:var(--serif);color:var(--gold-lt);letter-spacing:.12em;margin-right:8px}
+.quiz-band .ans{padding:0 18px 18px;font-size:14.5px;color:rgba(255,255,255,.9)}
+.quiz-band .ans b{color:var(--gold-lt)}
 
-/* ---------- mobile bar ---------- */
-.mobile-bar{position:fixed;left:0;right:0;bottom:0;z-index:99;display:none;grid-template-columns:1.4fr 1fr;gap:1px;background:rgba(183,151,94,.5);border-top:1px solid rgba(183,151,94,.5);transform:translateY(110%);transition:transform .4s ease}
-.mobile-bar.show{transform:none}
-.mobile-bar a{display:flex;align-items:center;justify-content:center;min-height:58px;font-size:13px;font-weight:700;letter-spacing:.06em;text-decoration:none}
-.mobile-bar .m-web{background:var(--gold);color:#fff}
-.mobile-bar .m-tel{background:var(--navy);color:#fff}
-@media(max-width:820px){.mobile-bar{display:grid}}
-@media(prefers-reduced-motion:reduce){.mobile-bar{transition:none}}
+/* recruit bits */
+.washi{background:radial-gradient(900px 500px at 90% -10%,rgba(217,200,192,.4),transparent 60%),
+  radial-gradient(700px 400px at -10% 40%,rgba(183,155,108,.16),transparent 60%),var(--kinari)}
+.green{background:var(--midori);color:var(--kinari)}
+.green .sec-label{color:var(--gold-lt)}
+.green .sec-label::before{background:var(--gold-lt)}
+.green .sec-title{color:#fff}
+.green .sec-lead,.green p{color:rgba(247,244,239,.85)}
+.persona li{list-style:none;border-top:1px solid rgba(183,155,108,.4);padding:16px 0;display:grid;grid-template-columns:44px 1fr;gap:12px}
+.persona b{font-family:var(--serif);font-size:20px;color:var(--gold-lt)}
+.persona h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:3px}
+.goal{background:var(--midori);color:#fff;text-align:center;padding:24px 18px;border-radius:4px}
+.goal b{font-family:var(--serif);font-size:21px;letter-spacing:.06em;font-weight:600}
+.goal b em{font-style:normal;color:var(--gold-lt);font-size:1.35em}
+.goal p{font-size:13.5px;color:rgba(247,244,239,.82);margin-top:6px}
+.msg-photo{border-radius:4px;overflow:hidden;border:1px solid rgba(183,155,108,.45);margin-bottom:20px}
+.msg-photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.sign{margin-top:22px;padding-top:16px;border-top:1px solid rgba(183,155,108,.4)}
+.sign .r{font-size:12.5px;color:#6E7482}
+.sign .n{font-family:var(--serif);font-size:21px;letter-spacing:.14em}
+
+/* footer */
+footer{background:#050F1E;color:rgba(247,243,236,.72);padding:36px 20px 40px;text-align:center;font-size:13px;line-height:1.9}
+footer .fl{font-family:var(--serif);font-size:21px;letter-spacing:.36em;color:#fff;margin-bottom:12px}
+footer a{color:var(--gold-lt)}
+footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+footer .sm{font-size:12px;color:rgba(247,243,236,.5);margin-top:14px;line-height:1.7}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .sheet-panel{animation:none}
+  .hero .bg video{display:none}
+}
+
+/* ============ tablet / desktop ============ */
+@media(min-width:768px){
+  body{padding-bottom:0;font-size:16.5px}
+  .wrap{max-width:1080px;padding:0 32px}
+  .sec{padding:88px 0}
+  .sec-title{font-size:34px}
+  .sec-lead{font-size:16px;max-width:660px}
+  .hero{min-height:88svh}
+  .hero-in{padding:150px 32px 80px}
+  .hero h1{font-size:46px}
+  .hero .sub{font-size:16.5px;max-width:540px}
+  .badges{grid-template-columns:repeat(4,1fr);max-width:760px}
+  .btn{width:auto;min-width:240px}
+  .btn-row{flex-direction:row;flex-wrap:wrap}
+  .stack.c2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .stack.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .grid2{grid-template-columns:repeat(3,1fr);gap:14px}
+  .nums{grid-template-columns:repeat(3,1fr)}
+  .nums .v{font-size:22px}.nums .v b{font-size:34px}
+  .checks{grid-template-columns:repeat(3,1fr)}
+  .table th{display:table-cell;width:180px;white-space:nowrap;border-bottom:1px solid rgba(183,151,94,.25);padding:16px}
+  .table td{display:table-cell;padding:16px}
+  .tabbar{display:none}
+  header{padding:12px 32px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .split.rev .figure{order:2}
+  .spa-video{max-width:100%}
+  .score{font-size:76px}
+}
 </style>
 </head>
-<body>
+<body data-view="salon">
 
 <header>
   <a class="logo" href="#top">ALVELLA<small>KYOTO · KARASUMA OIKE</small></a>
-  <nav>
-    <a class="nl" href="#concept">コンセプト</a>
-    <a class="nl" href="#menu">メニュー</a>
-    <a class="nl" href="#specialty">髪質改善・ヘッドスパ</a>
-    <a class="nl" href="#staff">スタッフ</a>
-    <a class="nl" href="#access">アクセス</a>
-    <a class="nl" href="park.html">PARK</a>
-    <a class="nl" href="recruit.html">RECRUIT</a>
-    <a class="btn btn-gold" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">WEB予約</a>
-  </nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sheet"><span aria-hidden="true"></span>メニュー</button>
 </header>
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="top">
-  <div class="bg">
-    <img src="assets/interior-main.jpg" alt="ALVELLAの半個室の店内。金の額縁の鏡とネイビーの家具" width="1479" height="1109">
-    <video autoplay muted loop playsinline preload="metadata" poster="assets/interior-main.jpg" aria-hidden="true" tabindex="-1">
-      <source src="assets/intro.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="wrap hero-inner">
-    <p class="hero-eyebrow">京都・烏丸御池|髪質改善とヘッドスパの半個室サロン</p>
-    <h1 class="reveal">健康的な美しさと、<br><span class="gold">おもてなしの時間</span>を。</h1>
-    <p class="hero-sub reveal d1">うねり・広がり・ダメージ。髪のお悩みに寄り添うケアと、人目を気にせず過ごせる半個室のプライベートな時間で、扱いやすい艶やかな髪へ導きます。</p>
-    <div class="hero-cta reveal d2">
-      <a class="btn btn-gold" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">WEB予約(24時間受付)</a>
-      <a class="btn btn-line" style="color:#fff" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">InstagramでDM相談</a>
+<!-- ===================== SALON ===================== -->
+<div class="view on" id="v-salon">
+  <section class="hero" id="top">
+    <div class="bg">
+      <img src="assets/interior-main.jpg" alt="ALVELLAの半個室の店内。金の額縁の鏡とネイビーの家具" width="1479" height="1109">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/interior-main.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/intro.mp4" type="video/mp4">
+      </video>
     </div>
-    <div class="hero-badges reveal d2">
-      <div><b>4.9</b>口コミ評価<small>※</small></div>
-      <div><b>半個室</b>マンツーマン施術</div>
-      <div><b>約1,500名</b>年間ご来店<small>※</small></div>
-      <div><b>徒歩6分</b>四条駅・烏丸御池駅</div>
+    <div class="wrap hero-in">
+      <p class="eyebrow">京都・烏丸御池|髪質改善とヘッドスパの半個室サロン</p>
+      <h1>健康的な美しさと、<br><span class="g">おもてなしの時間</span>を。</h1>
+      <p class="sub">うねり・広がり・ダメージ。髪のお悩みに寄り添うケアと、人目を気にせず過ごせるプライベートな時間で、扱いやすい艶やかな髪へ。</p>
+      <div class="btn-row">
+        <a class="btn btn-fill" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">WEB予約(24時間受付)</a>
+        <a class="btn btn-line" style="color:#fff" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">InstagramのDMで相談</a>
+      </div>
+      <div class="badges">
+        <div><b>4.9</b>口コミ評価<sup>※</sup></div>
+        <div><b>半個室</b>マンツーマン施術</div>
+        <div><b>9:00〜19:00</b>月・火定休</div>
+        <div><b>徒歩6分</b>四条駅・烏丸御池駅</div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= CONCEPT ================= -->
-<section id="concept">
-  <div class="wrap">
-    <p class="sec-label reveal">Concept</p>
-    <h2 class="sec-title reveal">扉を開けた瞬間から、あなたの時間。</h2>
-    <div class="concept-inner">
-      <div class="concept reveal d1">
+  <section class="sec" id="s-concept">
+    <div class="wrap">
+      <p class="sec-label rv">Concept</p>
+      <h2 class="sec-title rv">扉を開けた瞬間から、あなたの時間。</h2>
+      <div class="figure rv" style="margin-bottom:22px"><img src="assets/welcome.jpg" alt="ネイビーのエントランスでお出迎えするALVELLAのスタッフ" loading="lazy" width="1400" height="1050"></div>
+      <div class="rv" style="color:var(--ink-2)">
         <p>ALVELLAが目指すのは、テーマパークのようなおもてなし。髪を整えるだけでなく、ここで過ごす時間そのものが心をほどく体験であるように——空間も、会話も、施術も、一人ひとりに合わせてご用意しています。</p>
         <p>髪質・クセ・骨格・ライフスタイル。同じ髪はひとつもないから、カウンセリングに時間をかけ、あなたに本当に似合うスタイルと、毎朝が楽になるケアをご提案します。</p>
         <p>4席だけの半個室。隣の視線を気にせず、髪の悩みも遠慮なくご相談ください。</p>
       </div>
-      <div class="concept-visual reveal d2">
-        <img src="assets/welcome.jpg" alt="ネイビーのエントランスでお出迎えするALVELLAのスタッフ" width="1400" height="1050" loading="lazy">
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= MENU ================= -->
-<section class="menu" id="menu">
-  <div class="wrap">
-    <p class="sec-label reveal">Menu &amp; Price</p>
-    <h2 class="sec-title reveal">メニュー・料金</h2>
-    <p class="sec-lead reveal d1">表示はすべて税込です。掲載メニューはロング料金なし。<br>所要時間の目安・最新のクーポンは予約画面でご確認ください。<!-- TODO: 所要時間が確定したら各カードに追記 --></p>
-    <div class="menu-grid reveal d1">
-      <div class="menu-card">
-        <p class="for">はじめての方・骨格やクセに悩む方に</p>
-        <h3>似合わせカット</h3>
-        <p>髪質・クセ・骨格・ライフスタイルを丁寧に伺い、毎朝の再現性まで考えた「あなたに似合う」を仕立てます。</p>
-        <p class="price">¥7,700</p>
+  <section class="sec" id="s-menu" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Menu &amp; Price</p>
+      <h2 class="sec-title rv">メニュー・料金</h2>
+      <p class="sec-lead rv">表示はすべて税込です。掲載メニューはロング料金なし。所要時間・最新のクーポンは予約画面でご確認ください。</p>
+      <div class="stack c3 rv">
+        <div class="card menu-card"><p class="for">はじめての方・骨格やクセに悩む方に</p><h3>似合わせカット</h3><p>髪質・クセ・骨格・ライフスタイルを丁寧に伺い、毎朝の再現性まで考えた「あなたに似合う」を仕立てます。</p><p class="price">¥7,700</p></div>
+        <div class="card menu-card"><p class="for">色持ちと艶にこだわりたい方に</p><h3>艶カラー</h3><p>肌映えと艶感を大切にした色設計。白髪ぼかしのご相談も、半個室でゆっくりどうぞ。</p><p class="price">¥9,900</p></div>
+        <div class="card menu-card"><p class="for">頭が重い・疲れが気になる方に</p><h3>血行促進ヘッドスパ</h3><p>頭皮の状態に合わせた手技で、じっくりほぐすリラックスの時間。目元まわりまで軽やかな心地よさへ。</p><p class="price">¥8,800</p></div>
+        <div class="card menu-card"><p class="for">とことん癒やされたい方に</p><h3>頭浸浴ヘッドスパ</h3><p>あたたかいお湯に頭皮ごとゆだねる話題の頭浸浴と、ヘッドスパの組み合わせ。深いリラックスをどうぞ。</p><p class="price">¥11,000</p></div>
+        <div class="card menu-card"><p class="for">広がり・パサつきが気になる方に</p><h3>水素トリートメント</h3><p>クレンジングで頭皮を整えてから、髪の内側の水分バランスをケア。指どおりのよい、扱いやすい状態へ導きます。</p><p class="price">¥13,000</p></div>
+        <div class="card menu-card"><p class="for">まとめてキレイを叶えたい方に</p><h3>カット + 艶カラー + Aujua</h3><p>カットとカラーに、髪に合わせて選ぶAujuaトリートメントをプラスした人気のセットメニューです。</p><p class="price">¥23,000<small>〜</small></p></div>
       </div>
-      <div class="menu-card">
-        <p class="for">色持ちと艶にこだわりたい方に</p>
-        <h3>艶カラー</h3>
-        <p>肌映えと艶感を大切にした色設計。白髪ぼかしのご相談も、半個室でゆっくりどうぞ。</p>
-        <p class="price">¥9,900</p>
-      </div>
-      <div class="menu-card">
-        <p class="for">頭が重い・疲れが気になる方に</p>
-        <h3>血行促進ヘッドスパ</h3>
-        <p>頭皮の状態に合わせた手技で、じっくりほぐすリラックスの時間。目元まわりまで軽やかな心地よさへ。</p>
-        <p class="price">¥8,800</p>
-      </div>
-      <div class="menu-card">
-        <p class="for">とことん癒やされたい方に</p>
-        <h3>頭浸浴ヘッドスパ</h3>
-        <p>あたたかいお湯に頭皮ごとゆだねる話題の頭浸浴と、ヘッドスパの組み合わせ。深いリラックスをどうぞ。</p>
-        <p class="price">¥11,000</p>
-      </div>
-      <div class="menu-card">
-        <p class="for">広がり・パサつきが気になる方に</p>
-        <h3>水素トリートメント</h3>
-        <p>クレンジングで頭皮を整えてから、髪の内側の水分バランスをケア。指どおりのよい、扱いやすい状態へ導きます。</p>
-        <p class="price">¥13,000</p>
-      </div>
-      <div class="menu-card">
-        <p class="for">まとめてキレイを叶えたい方に</p>
-        <h3>カット + 艶カラー + Aujua</h3>
-        <p>カットとカラーに、髪に合わせて選ぶAujuaトリートメントをプラスした人気のセットメニューです。</p>
-        <p class="price">¥23,000<small>〜</small></p>
-      </div>
+      <p class="note">※縮毛矯正・ヘアセットなど掲載外のメニューは、お電話またはDMでご相談ください。頭浸浴はご予約状況により承れない場合があります。</p>
+      <div class="btn-row" style="margin-top:20px"><a class="btn btn-navy" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">すべてのメニューと空席を見る</a></div>
     </div>
-    <p class="menu-note">※縮毛矯正・ヘアセットなど掲載外のメニューは、お電話またはDMでご相談ください。頭浸浴はご予約状況により承れない場合があります。</p>
-    <p class="menu-cta"><a class="btn btn-navy" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">すべてのメニューと空席を見る</a></p>
-  </div>
-</section>
+  </section>
 
-<!-- ================= SPECIALTY ================= -->
-<section class="spec" id="specialty">
-  <div class="wrap">
-    <p class="sec-label reveal">Specialty</p>
-    <h2 class="sec-title reveal">髪質改善とヘッドスパの、専門サロンとして。</h2>
-    <p class="sec-lead reveal d1">流行のスタイルをつくって終わりではなく、髪と頭皮のコンディションから整える。それがALVELLAの選んだ道です。</p>
+  <section class="sec dark" id="s-care">
+    <div class="wrap">
+      <p class="sec-label rv">Specialty</p>
+      <h2 class="sec-title rv">髪質改善とヘッドスパの、専門サロンとして。</h2>
+      <p class="sec-lead rv">流行のスタイルをつくって終わりではなく、髪と頭皮のコンディションから整える。それがALVELLAの選んだ道です。</p>
 
-    <div class="spec-block reveal">
-      <div class="spec-visual"><img src="assets/styling.jpg" alt="スタイリストが髪の状態を確かめながら施術する様子" loading="lazy" width="1156" height="648"></div>
-      <div>
-        <h3>髪質改善メニュー</h3>
-        <div class="spec-tags"><span>うねり</span><span>広がり</span><span>パサつき</span><span>カラーダメージ</span><span>年齢による変化</span></div>
-        <p>水素トリートメントやAujuaを髪の状態に合わせて選び、髪の水分バランスと手触りを整えます。「乾かすだけでまとまる」毎日を目指して、自宅でのケア方法まで丁寧にお伝えします。</p>
-        <ol>
-          <li><b>STEP 1</b>カウンセリングで髪の履歴とお悩みを伺います</li>
-          <li><b>STEP 2</b>髪質に合わせて薬剤・トリートメントを選定</li>
-          <li><b>STEP 3</b>仕上げと、ご自宅でのケアのご提案</li>
-        </ol>
-      </div>
-    </div>
-
-    <div class="spec-block rev reveal">
-      <div class="spec-visual spa-video">
-        <video autoplay muted loop playsinline preload="none" poster="assets/headspa.jpg" aria-hidden="true" tabindex="-1">
-          <source src="assets/headspa.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div>
-        <h3>ヘッドスパ・頭浸浴</h3>
-        <div class="spec-tags"><span>リラックス</span><span>頭皮ケア</span><span>半個室</span><span>マンツーマン</span></div>
-        <p>頭皮をあたたかいお湯にゆだねる「頭浸浴」と、手技によるヘッドスパ。半個室のプライベートな空間で、眠ってしまうほどの心地よさをご体験ください。デスクワークで頭や目元の疲れが気になる方にも人気です。</p>
-        <ol>
-          <li><b>STEP 1</b>頭皮の状態を確認し、コースをご提案</li>
-          <li><b>STEP 2</b>頭浸浴・手技でじっくりとほぐします</li>
-          <li><b>STEP 3</b>スタイリングと頭皮ケアのアドバイス</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FIRST VISIT ================= -->
-<section id="first">
-  <div class="wrap">
-    <p class="sec-label reveal">First Visit</p>
-    <h2 class="sec-title reveal">はじめてのお客様へ</h2>
-    <p class="sec-lead reveal d1">初めてのサロンは、誰でも少し緊張するもの。ALVELLAでは、カウンセリングの時間を大切にしています。</p>
-    <div class="steps reveal d1">
-      <div class="step"><b>STEP 01</b><h3>ご予約</h3><p>WEB予約が24時間ご利用いただけます。メニューに迷ったら「相談して決めたい」でも大丈夫です。</p></div>
-      <div class="step"><b>STEP 02</b><h3>カウンセリング</h3><p>髪の履歴・普段のお手入れ・なりたいイメージを、半個室でゆっくり伺います。</p></div>
-      <div class="step"><b>STEP 03</b><h3>施術・ご提案</h3><p>仕上がりだけでなく、明日からの扱いやすさまで見据えてご提案します。</p></div>
-    </div>
-    <div class="faq reveal d2">
-      <details>
-        <summary>メニューをどう選べばいいか分かりません。</summary>
-        <p class="a">カウンセリングで髪の状態を拝見してからのご提案もできます。ご予約時は「似合わせカット」など基本メニューをお選びいただき、当日ご相談ください。</p>
-      </details>
-      <details>
-        <summary>縮毛矯正やヘアセットはお願いできますか?</summary>
-        <p class="a">掲載外のメニューは、お電話(070-1741-3841)またはInstagramのDMにてご相談ください。</p>
-      </details>
-      <details>
-        <summary>頭浸浴はいつでも受けられますか?</summary>
-        <p class="a">ご予約状況により承れない場合があります。ご希望の方は予約時にその旨をお書き添えください。</p>
-      </details>
-      <details>
-        <summary>営業時間・定休日を教えてください。</summary>
-        <p class="a">営業時間は9:00〜19:00、定休日は毎週月曜日・火曜日です。完全予約制のため、空き状況は<a href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">予約ページ</a>でご確認ください。</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ================= STAFF ================= -->
-<section class="staff" id="staff">
-  <div class="wrap">
-    <p class="sec-label reveal">Staff</p>
-    <h2 class="sec-title reveal">あなたの髪に、寄り添うチーム。</h2>
-    <div class="staff-grid reveal d1">
-      <div class="staff-card">
-        <div class="ph"><img src="assets/owner.jpg" alt="ALVELLAオーナーの角井竜" loading="lazy" width="679" height="509"></div>
-        <!-- 集合写真から切り出し。プロ撮影の個人ポートレートが用意でき次第差し替え推奨 -->
-        <div class="body">
-          <p class="role">期待を超えるおもてなしプロデューサー(歴11年)</p>
-          <h3>角井 竜<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">カクイ リュウ</span></h3>
-          <p>【30代】大人可愛いを叶える美髪プロデュース。カウンセリングからお見送りまで、一人ひとりの時間を丁寧に仕立てます。</p>
-          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a></p>
+      <div class="split rv" style="margin-bottom:36px">
+        <div class="figure" style="margin-bottom:18px"><img src="assets/styling.jpg" alt="スタイリストが髪の状態を確かめながら施術する様子" loading="lazy" width="1156" height="648"></div>
+        <div>
+          <h3>髪質改善メニュー</h3>
+          <div class="tags"><span>うねり</span><span>広がり</span><span>パサつき</span><span>カラーダメージ</span><span>年齢による変化</span></div>
+          <p>水素トリートメントやAujuaを髪の状態に合わせて選び、髪の水分バランスと手触りを整えます。「乾かすだけでまとまる」毎日を目指して、自宅でのケア方法まで丁寧にお伝えします。</p>
+          <ol class="steps-ol">
+            <li><b>STEP 1</b>カウンセリングで髪の履歴とお悩みを伺います</li>
+            <li><b>STEP 2</b>髪質に合わせて薬剤・トリートメントを選定</li>
+            <li><b>STEP 3</b>仕上げと、ご自宅でのケアのご提案</li>
+          </ol>
         </div>
       </div>
-      <div class="staff-card">
-        <div class="ph"><img src="assets/portrait-staff.jpg" alt="ALVELLAスタイリストの澁谷憂樹" loading="lazy" width="960" height="1280"></div>
-        <div class="body">
-          <p class="role">トータルケアコンシェルジュ(歴6年)</p>
-          <h3>澁谷 憂樹<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">シブヤ ユウキ</span></h3>
-          <p>【20代 支持率No.1】丁寧なカウンセリングが好評。艶髪スタイルと髪質改善メニューが得意です。一緒に可愛いを創りましょう。</p>
-          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">@alvella_yuuki</a></p>
+
+      <div class="split rev rv">
+        <div class="spa-video figure" style="margin-bottom:18px">
+          <video autoplay muted loop playsinline preload="none" poster="assets/headspa.jpg" aria-hidden="true" tabindex="-1">
+            <source src="assets/headspa.mp4" type="video/mp4">
+          </video>
         </div>
-      </div>
-      <div class="staff-card">
-        <div class="ph"><img src="assets/giriko.jpg" alt="ALVELLAスタイリストの儀利古真奈" loading="lazy" width="591" height="443"></div>
-        <div class="body">
-          <p class="role">韓国好き美容師(歴5年)</p>
-          <h3>儀利古 真奈<span style="font-size:11px;letter-spacing:.1em;color:#8a8f9b;margin-left:10px">ギリコ マナ</span></h3>
-          <p>韓国スタイル・透明感カラーで艶髪づくりが得意。緊張しやすい方にも話していただきやすい空間づくりを大切にしています。</p>
-          <p style="margin-top:10px"><a href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">@alvella_giriko</a></p>
+        <div>
+          <h3>ヘッドスパ・頭浸浴</h3>
+          <div class="tags"><span>リラックス</span><span>頭皮ケア</span><span>半個室</span><span>マンツーマン</span></div>
+          <p>頭皮をあたたかいお湯にゆだねる「頭浸浴」と、手技によるヘッドスパ。半個室のプライベートな空間で、眠ってしまうほどの心地よさをご体験ください。デスクワークで頭や目元の疲れが気になる方にも人気です。</p>
+          <ol class="steps-ol">
+            <li><b>STEP 1</b>頭皮の状態を確認し、コースをご提案</li>
+            <li><b>STEP 2</b>頭浸浴・手技でじっくりとほぐします</li>
+            <li><b>STEP 3</b>スタイリングと頭皮ケアのアドバイス</li>
+          </ol>
         </div>
       </div>
     </div>
-    <!-- TODO: スタッフインタビュー動画(儀利古さん / 澁谷さん)の30秒抜粋をここにクリック再生で設置(全編は採用サイトへ) -->
-    <p class="staff-note">アシスタント1名も在籍しています。ご指名は<a href="https://beauty.hotpepper.jp/slnH000680090/stylist/" target="_blank" rel="noopener" style="color:var(--gold-deep);font-weight:700">WEB予約のスタイリスト一覧</a>からどうぞ。</p>
-  </div>
-</section>
+  </section>
 
-<!-- ================= GALLERY ================= -->
-<section id="gallery">
-  <div class="wrap">
-    <p class="sec-label reveal">Gallery</p>
-    <h2 class="sec-title reveal">空間と、しつらえ。</h2>
-    <div class="gal-grid reveal d1">
-      <figure><img src="assets/interior-main.jpg" alt="金の額縁ミラーとネイビーの家具が並ぶ店内" loading="lazy" width="1479" height="1109"></figure>
-      <figure><img src="assets/interior-booth.jpg" alt="半個室ブースの様子" loading="lazy" width="1400" height="1050"></figure>
-      <figure><img src="assets/counseling-2.jpg" alt="ソファでのカウンセリング風景" loading="lazy" width="1400" height="1050"></figure>
-      <figure><img src="assets/counseling-1.jpg" alt="タブレットを使ったカウンセリング" loading="lazy" width="1400" height="1050"></figure>
-      <!-- TODO: counseling写真にお客様が写っている場合は掲載許諾を確認 -->
-      <a class="gal-coming" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">スタイル写真は<br>Instagramで公開中 →</a>
-      <a class="gal-coming" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">悩み別スタイル集<br>COMING SOON</a>
-      <!-- TODO: 悩み別(うねり/広がり/白髪ぼかし/艶カラー)のスタイル写真が揃い次第、上の2枠を差し替え -->
+  <section class="sec" id="s-first">
+    <div class="wrap">
+      <p class="sec-label rv">First Visit</p>
+      <h2 class="sec-title rv">はじめてのお客様へ</h2>
+      <p class="sec-lead rv">初めてのサロンは、誰でも少し緊張するもの。ALVELLAでは、カウンセリングの時間を大切にしています。</p>
+      <div class="stack c3 rv" style="margin-bottom:26px">
+        <div class="step"><b>STEP 01</b><h3>ご予約</h3><p>WEB予約が24時間ご利用いただけます。メニューに迷ったら「相談して決めたい」でも大丈夫です。</p></div>
+        <div class="step"><b>STEP 02</b><h3>カウンセリング</h3><p>髪の履歴・普段のお手入れ・なりたいイメージを、半個室でゆっくり伺います。</p></div>
+        <div class="step"><b>STEP 03</b><h3>施術・ご提案</h3><p>仕上がりだけでなく、明日からの扱いやすさまで見据えてご提案します。</p></div>
+      </div>
+      <div class="faq rv">
+        <details><summary>メニューをどう選べばいいか分かりません。</summary><p class="a">カウンセリングで髪の状態を拝見してからのご提案もできます。ご予約時は「似合わせカット」など基本メニューをお選びいただき、当日ご相談ください。</p></details>
+        <details><summary>縮毛矯正やヘアセットはお願いできますか?</summary><p class="a">掲載外のメニューは、お電話(070-1741-3841)またはInstagramのDMにてご相談ください。</p></details>
+        <details><summary>頭浸浴はいつでも受けられますか?</summary><p class="a">ご予約状況により承れない場合があります。ご希望の方は予約時にその旨をお書き添えください。</p></details>
+        <details><summary>営業時間・定休日を教えてください。</summary><p class="a">営業時間は9:00〜19:00、定休日は毎週月曜日・火曜日です。完全予約制のため、空き状況は予約ページでご確認ください。</p></details>
+      </div>
     </div>
-    <p class="gal-note">最新のスタイル・サロンの日常は <a href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener" style="color:var(--gold-deep);font-weight:700">Instagram @alvella_official</a> でご覧いただけます。</p>
-  </div>
-</section>
+  </section>
 
-<!-- ================= VOICE ================= -->
-<section class="voice">
-  <div class="wrap">
-    <p class="sec-label reveal" style="justify-content:center">Reviews</p>
-    <p class="score reveal">4.9<small> / 5.0</small></p>
-    <p class="reveal d1">ホットペッパービューティーの口コミ評価<!-- TODO: 掲載時点の最新値・件数を確認して「(◯件・◯年◯月時点)」を追記 -->。<br>ご来店いただいたお客様の声が、私たちの何よりの支えです。</p>
-    <a class="btn btn-line reveal d1" style="color:var(--navy)" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">口コミを読む</a>
-  </div>
-</section>
+  <section class="sec" id="s-staff" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Staff</p>
+      <h2 class="sec-title rv">あなたの髪に、寄り添うチーム。</h2>
+      <div class="stack c3 rv">
+        <div class="person">
+          <div class="ph"><img src="assets/owner.jpg" alt="ALVELLAオーナーの角井竜" loading="lazy" width="679" height="509"></div>
+          <div class="body">
+            <p class="role">期待を超えるおもてなしプロデューサー(歴11年)</p>
+            <h3>角井 竜<small>カクイ リュウ</small></h3>
+            <p>【30代】大人可愛いを叶える美髪プロデュース。カウンセリングからお見送りまで、一人ひとりの時間を丁寧に仕立てます。</p>
+            <a class="ig" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a>
+          </div>
+        </div>
+        <div class="person">
+          <div class="ph"><img src="assets/portrait-staff.jpg" alt="ALVELLAスタイリストの澁谷憂樹" loading="lazy" width="960" height="1280"></div>
+          <div class="body">
+            <p class="role">トータルケアコンシェルジュ(歴6年)</p>
+            <h3>澁谷 憂樹<small>シブヤ ユウキ</small></h3>
+            <p>【20代 支持率No.1】丁寧なカウンセリングが好評。艶髪スタイルと髪質改善メニューが得意です。</p>
+            <a class="ig" href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">@alvella_yuuki</a>
+          </div>
+        </div>
+        <div class="person">
+          <div class="ph"><img src="assets/giriko.jpg" alt="ALVELLAスタイリストの儀利古真奈" loading="lazy" width="591" height="443"></div>
+          <div class="body">
+            <p class="role">韓国好き美容師(歴5年)</p>
+            <h3>儀利古 真奈<small>ギリコ マナ</small></h3>
+            <p>韓国スタイル・透明感カラーで艶髪づくりが得意。緊張しやすい方にも話していただきやすい空間づくりを大切にしています。</p>
+            <a class="ig" href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">@alvella_giriko</a>
+          </div>
+        </div>
+      </div>
+      <p class="note">アシスタント1名も在籍しています。ご指名は<a href="https://beauty.hotpepper.jp/slnH000680090/stylist/" target="_blank" rel="noopener" style="color:var(--accent-dp);font-weight:700">WEB予約のスタイリスト一覧</a>からどうぞ。</p>
+    </div>
+  </section>
 
-<!-- ================= ACCESS ================= -->
-<section id="access">
-  <div class="wrap">
-    <p class="sec-label reveal">Access</p>
-    <h2 class="sec-title reveal">店舗情報・アクセス</h2>
-    <div class="access-inner access reveal d1">
-      <div>
-        <table>
-          <tr><th>店名</th><td>ALVELLA(アルベラ)</td></tr>
-          <tr><th>住所</th><td>〒604-8121<br>京都府京都市中京区玉蔵町123<br>グランレブリー室町六角101</td></tr>
-          <tr><th>アクセス</th><td>地下鉄「四条駅」22番出口・「烏丸御池駅」6番出口から徒歩6分</td></tr>
-          <tr><th>電話</th><td><a href="tel:07017413841" style="color:var(--gold-deep);font-weight:700">070-1741-3841</a><br><span style="font-size:12px">施術中は出られない場合があります。WEB予約・DMが確実です。</span></td></tr>
-          <tr><th>営業時間</th><td>9:00〜19:00(完全予約制)</td></tr>
-          <tr><th>定休日</th><td>毎週月曜日・火曜日</td></tr>
-          <tr><th>お支払い</th><td>各種クレジットカード(Visa / Mastercard / JCB / AMEX / Diners / 銀聯 / Discover)、PayPay・d払い・楽天ペイ・au PAY・iD・QUICPay</td></tr>
-          <tr><th>駐車場</th><td>店舗の目の前にコインパーキングあり</td></tr>
-          <tr><th>サロン</th><td>セット面4席・半個室あり・禁煙<br>1人のスタイリストが仕上げまで担当します<br><span style="font-size:12px">※ブリーチの施術はお断りする場合があります。ドリンクサービスはケアメニューのお客様が対象です。</span></td></tr>
-        </table>
+  <section class="sec" id="s-gallery">
+    <div class="wrap">
+      <p class="sec-label rv">Gallery</p>
+      <h2 class="sec-title rv">空間と、しつらえ。</h2>
+      <div class="grid2 rv">
+        <figure><img src="assets/interior-main.jpg" alt="金の額縁ミラーとネイビーの家具が並ぶ店内" loading="lazy" width="1479" height="1109"></figure>
+        <figure><img src="assets/interior-booth.jpg" alt="半個室ブースの様子" loading="lazy" width="1400" height="1050"></figure>
+        <figure><img src="assets/counseling-2.jpg" alt="ソファでのカウンセリング風景" loading="lazy" width="1400" height="1050"></figure>
+        <figure><img src="assets/counseling-1.jpg" alt="タブレットを使ったカウンセリング" loading="lazy" width="1400" height="1050"></figure>
+        <a class="soon" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">スタイル写真は<br>Instagramで公開中 →</a>
+        <a class="soon" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">悩み別スタイル集<br>COMING SOON</a>
+      </div>
+      <p class="note">最新のスタイル・サロンの日常は <a href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener" style="color:var(--accent-dp);font-weight:700">Instagram @alvella_official</a> でご覧いただけます。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s-reviews" style="background:var(--paper-2);text-align:center">
+    <div class="wrap">
+      <p class="sec-label rv" style="justify-content:center">Reviews</p>
+      <p class="score rv">4.9<small> / 5.0</small></p>
+      <p class="sec-lead rv" style="margin:10px auto 22px">ホットペッパービューティーの口コミ評価。<br>ご来店いただいたお客様の声が、私たちの何よりの支えです。</p>
+      <div class="btn-row rv" style="align-items:center;justify-content:center"><a class="btn btn-line" style="color:var(--navy)" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">口コミを読む</a></div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-access">
+    <div class="wrap">
+      <p class="sec-label rv">Access</p>
+      <h2 class="sec-title rv">店舗情報・アクセス</h2>
+      <table class="table rv">
+        <tr><th>店名</th><td>ALVELLA(アルベラ)</td></tr>
+        <tr><th>住所</th><td>〒604-8121<br>京都府京都市中京区玉蔵町123<br>グランレブリー室町六角101</td></tr>
+        <tr><th>アクセス</th><td>地下鉄「四条駅」22番出口・「烏丸御池駅」6番出口から徒歩6分</td></tr>
+        <tr><th>電話</th><td><a href="tel:07017413841" style="color:var(--accent-dp);font-weight:700">070-1741-3841</a><br>施術中は出られない場合があります。WEB予約・DMが確実です。</td></tr>
+        <tr><th>営業時間</th><td>9:00〜19:00(完全予約制)</td></tr>
+        <tr><th>定休日</th><td>毎週月曜日・火曜日</td></tr>
+        <tr><th>お支払い</th><td>各種クレジットカード(Visa / Mastercard / JCB / AMEX / Diners / 銀聯 / Discover)、PayPay・d払い・楽天ペイ・au PAY・iD・QUICPay</td></tr>
+        <tr><th>駐車場</th><td>店舗の目の前にコインパーキングあり</td></tr>
+        <tr><th>サロン</th><td>セット面4席・半個室あり・禁煙<br>1人のスタイリストが仕上げまで担当します<br>※ブリーチの施術はお断りする場合があります。ドリンクサービスはケアメニューのお客様が対象です。</td></tr>
+      </table>
+      <div class="btn-row rv" style="margin-top:20px">
         <a class="btn btn-navy" href="https://www.google.com/maps/search/?api=1&query=ALVELLA+%E4%BA%AC%E9%83%BD%E5%B8%82%E4%B8%AD%E4%BA%AC%E5%8C%BA%E7%8E%89%E8%94%B5%E7%94%BA123" target="_blank" rel="noopener">Googleマップで開く</a>
-        <!-- TODO: 道順動画(最寄駅→ALVELLA)が書き出せたら「動画で道順を見る」ボタンをここに追加 -->
+        <a class="btn btn-fill" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">WEB予約(24時間受付)</a>
       </div>
-      <div class="access-visual"><img src="assets/welcome.jpg" alt="ALVELLAのエントランス" loading="lazy" width="1400" height="1050"></div>
+      <!-- TODO: 道順動画(最寄駅→ALVELLA)が書き出せたら「動画で道順を見る」ボタンをここに追加 -->
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<!-- ================= ANNEX ================= -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="annex reveal">
-      <a class="park" href="park.html">
-        <img src="assets/park-story.jpg" alt="" loading="lazy" width="1050" height="1400">
-        <div><span>ANNEX</span><h3>PARK HAIR GUIDE</h3><p>パークへ出かける日の、ヘアと遊びの案内所。</p></div>
-      </a>
-      <a href="recruit.html">
-        <img src="assets/team.jpg" alt="" loading="lazy" width="1400" height="1050">
-        <div><span>RECRUIT</span><h3>採用サイト</h3><p>10年先も、美容師でいられる場所。仲間を募集しています。</p></div>
-      </a>
+<!-- ===================== PARK ===================== -->
+<div class="view" id="v-park">
+  <section class="hero">
+    <div class="bg"><img src="assets/park-story.jpg" alt="物語の一場面のような衣装で演出するALVELLAスタッフ" loading="lazy" width="1050" height="1400"></div>
+    <!-- TODO: おもてなし表現の動画(無音ループ)が書き出せたら、上に <video> を追加 -->
+    <div class="wrap hero-in">
+      <p class="eyebrow">ALVELLA ANNEX|パーク前ヘアの案内所</p>
+      <h1>出かける前から、<br>物語ははじまってる。</h1>
+      <p class="sub">とびきりの髪で、最高の一日へ。パークへ向かう日の朝が、もっと楽しみになる「パーク前ヘア」をご用意しています。</p>
+      <div class="btn-row"><a class="btn btn-fill" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">DMでパーク前ヘアを相談</a></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= RESERVE ================= -->
-<section class="reserve" id="reserve">
-  <div class="wrap">
-    <h2 class="sec-title reveal">ご予約</h2>
-    <p class="sec-lead reveal d1">髪のお悩みやご希望を添えてご予約いただくと、当日のご案内がスムーズです。</p>
-    <div class="res-cards reveal d1">
-      <div class="res-card">
-        <p class="tag">RECOMMENDED</p>
-        <h3>WEB予約</h3>
-        <p>24時間受付。メニュー・スタッフ・空席を見ながら予約できます。</p>
-        <a class="btn btn-gold" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">ホットペッパーで予約</a>
-      </div>
-      <div class="res-card">
-        <p class="tag">CASUAL</p>
-        <h3>DMで相談</h3>
-        <p>「どのメニューがいいか分からない」など、予約前のご相談もお気軽に。</p>
-        <a class="btn btn-line" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">InstagramのDMを送る</a>
-      </div>
-      <div class="res-card">
-        <p class="tag">PHONE</p>
-        <h3>お電話</h3>
-        <p>施術中は出られない場合があります。折り返しのご連絡をお待ちください。</p>
-        <a class="btn btn-line" href="tel:07017413841">070-1741-3841</a>
+  <section class="sec" id="p-flow">
+    <div class="wrap">
+      <p class="sec-label rv">A Perfect Day</p>
+      <h2 class="sec-title rv">行く日が、もっと楽しみになる。</h2>
+      <p class="sec-lead rv">ALVELLAが目指しているのは、テーマパークのようなおもてなし。だからこそ、出かける日のワクワクは私たちの得意分野です。</p>
+      <div class="stack c3 rv">
+        <div class="card"><p class="for" style="font-size:12.5px;color:var(--rose);font-weight:700">BEFORE</p><h3 style="font-family:var(--serif);font-size:20px;color:var(--plum);margin:6px 0;font-weight:600">相談する</h3><p style="font-size:14.5px;color:var(--ink-2)">服装・行き先・撮りたい写真の雰囲気まで、DMや予約メモで気軽に共有してください。</p></div>
+        <div class="card"><p class="for" style="font-size:12.5px;color:var(--rose);font-weight:700">AT ALVELLA</p><h3 style="font-family:var(--serif);font-size:20px;color:var(--plum);margin:6px 0;font-weight:600">仕上げる</h3><p style="font-size:14.5px;color:var(--ink-2)">崩れにくさと写真映えを両立するスタイリングで、出発前のわくわくを仕上げます。</p></div>
+        <div class="card"><p class="for" style="font-size:12.5px;color:var(--rose);font-weight:700">ALL DAY</p><h3 style="font-family:var(--serif);font-size:20px;color:var(--plum);margin:6px 0;font-weight:600">楽しむ</h3><p style="font-size:14.5px;color:var(--ink-2)">帰り道まで気分の上がる一日を。翌日からのお手入れ方法もお伝えします。</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="sec park-band" id="p-morning">
+    <div class="wrap">
+      <p class="sec-label rv">Morning Prep</p>
+      <h2 class="sec-title rv">朝9時から。開園前に、仕上げて出発。</h2>
+      <p class="big-time rv">AM 9:00</p>
+      <p class="sec-lead rv" style="margin-top:10px">OPEN|朝10時前のご予約も受付OK(完全予約制)。烏丸御池からひと足のばして、仕上がったその足でパークへ。</p>
+      <div class="tl rv">
+        <div><p class="t">9:00</p><div><h3>ALVELLAへ</h3><p>半個室でスタイリング。今日の服と行き先に合わせて、崩れにくい仕上げに。</p></div></div>
+        <div><p class="t">10:00</p><div><h3>仕上がって出発</h3><p>鏡の前で最終チェック。とびきりの髪で、電車に乗り込む。</p></div></div>
+        <div><p class="t">昼</p><div><h3>パークで思いっきり</h3><p>アトラクションも、パレードも、写真も。風に揺れても、直しやすいスタイル。</p></div></div>
+        <div><p class="t">夜</p><div><h3>夜景と、締めの一枚</h3><p>ライトアップの前で、今日いちばんの一枚を。髪はまだ、ちゃんと味方。</p></div></div>
+      </div>
+      <p class="note" style="color:rgba(255,255,255,.72)">※スタイリング(ヘアセット)のご予約は、InstagramのDMまたはお電話でご相談ください。日程・内容によっては承れない場合があります。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="p-ideas" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Style Ideas</p>
+      <h2 class="sec-title rv">パーク前ヘアの、アイデア帖。</h2>
+      <p class="sec-lead rv">「どんな髪型にしよう?」の参考に。髪質・長さ・その日の服に合わせて、いちばん似合う形にアレンジしてご提案します。</p>
+      <div class="stack c2 rv">
+        <div class="idea"><p class="no">IDEA 01</p><h3>ゆるふわポニー</h3><p>動いても可愛い、王道の後ろ姿。おくれ毛の量と巻き加減で、キャラクター級の完成度に。</p><span class="for">アトラクション多めの日に</span></div>
+        <div class="idea"><p class="no">IDEA 02</p><h3>カチューシャ映えハーフアップ</h3><p>現地でカチューシャを着けるのが決まっているなら、最初からそれを見越した設計で。</p><span class="for">カチューシャ派に</span></div>
+        <div class="idea"><p class="no">IDEA 03</p><h3>帽子と両立タイトスタイル</h3><p>キャップや耳つき帽子を脱いでも崩れない、タイトにまとめた艶スタイル。</p><span class="for">帽子派・風の強い日に</span></div>
+        <div class="idea"><p class="no">IDEA 04</p><h3>おそろいツインアレンジ</h3><p>友達や姉妹とリンクコーデの日は、髪もおそろいに。並んだ後ろ姿が絵になります。</p><span class="for">双子コーデの日に</span></div>
+      </div>
+      <p class="note">※アレンジ・ヘアセットは通常メニュー外のため、内容と料金は事前にDM・お電話でご相談ください。カットやカラーと合わせたご予約も歓迎です。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="p-keep">
+    <div class="wrap">
+      <div class="split">
+        <div class="figure rv" style="margin-bottom:20px"><img src="assets/styling.jpg" alt="仕上げの施術風景" loading="lazy" width="1156" height="648"></div>
+        <div class="rv">
+          <p class="sec-label">Park Day Hair</p>
+          <h2 class="sec-title">かわいいだけじゃない。<br>一日中、楽しめる髪。</h2>
+          <div class="stack">
+            <div class="card"><h3 style="font-family:var(--serif);font-size:18px;color:var(--plum);margin-bottom:6px;font-weight:600">湿気や風を見越した仕上げ</h3><p style="font-size:14.5px;color:var(--ink-2)">朝の仕込みで、崩れにくさは大きく変わります。髪質に合わせたベースづくりから。</p></div>
+            <div class="card"><h3 style="font-family:var(--serif);font-size:18px;color:var(--plum);margin-bottom:6px;font-weight:600">小物との両立を最初から設計</h3><p style="font-size:14.5px;color:var(--ink-2)">カチューシャ・帽子・ヘアピン。「着けたら崩れた」を防ぐ段取りでスタイリングします。</p></div>
+            <div class="card"><h3 style="font-family:var(--serif);font-size:18px;color:var(--plum);margin-bottom:6px;font-weight:600">自分で直せるスタイル</h3><p style="font-size:14.5px;color:var(--ink-2)">ピンの位置や直し方もお伝えするので、夜のパレードまで自分でキープできます。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="p-packing" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Packing List</p>
+      <h2 class="sec-title rv">パークの日の、ヘア持ち物メモ。</h2>
+      <div class="checks rv">
+        <div>ミニブラシ<small>前髪の直しに</small></div>
+        <div>ヘアピン 2〜3本<small>風対策の味方</small></div>
+        <div>小さめのゴム<small>急な結び直しに</small></div>
+        <div>携帯スタイリング剤<small>ミニサイズで十分</small></div>
+        <div>ヘアクリップ<small>食事中にさっと</small></div>
+        <div>手鏡<small>並ぶ間にチェック</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec quiz-band" id="p-quiz">
+    <div class="wrap">
+      <p class="sec-label rv">Story Quiz</p>
+      <h2 class="sec-title rv">ものがたり検定</h2>
+      <p class="sec-lead rv">パークで会えるあの物語たち、原作はどこまで知っていますか?昔ながらの童話から、スタッフが不定期で出題します。</p>
+      <div class="rv">
+        <details><summary><span class="qno">Q.01</span>『美女と野獣』。この物語が童話として最初に出版された国は、どこ?</summary><p class="ans">答えは <b>フランス</b>。18世紀のフランスで生まれた童話で、のちに世界中で愛される物語になりました。</p></details>
+        <details><summary><span class="qno">Q.02</span>『シンデレラ』(ペロー版)。かぼちゃを馬車に変えてくれたのは、だれ?</summary><p class="ans">答えは <b>名付け親の妖精(フェアリー・ゴッドマザー)</b>。ドレスもガラスの靴も、この妖精の魔法です。</p></details>
+        <details><summary><span class="qno">Q.03</span>『白雪姫』(グリム童話)。「世界でいちばん美しいのはだれ?」と女王が尋ねた相手は?</summary><p class="ans">答えは <b>鏡</b>。「鏡よ鏡…」の問いかけは、原作のグリム童話から受け継がれています。</p></details>
+      </div>
+      <p class="note" style="color:rgba(255,255,255,.68)">※出題は昔話・童話(原作)にもとづくオリジナル企画です。次の問題はInstagramのストーリーでも予告します。</p>
+    </div>
+  </section>
+
+  <section class="sec park-band" style="text-align:center">
+    <div class="wrap">
+      <h2 class="sec-title rv">最高の一日を、最高の髪から。</h2>
+      <p class="sec-lead rv" style="margin-left:auto;margin-right:auto">「この日パークに行きます!」だけでもOK。日程とイメージを聞かせてください。</p>
+      <div class="btn-row rv">
+        <a class="btn btn-line" style="background:#fff;color:var(--rose);border-color:#fff" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">DMで相談する</a>
+        <a class="btn btn-line" style="color:#fff" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">カット・カラーを予約する</a>
+      </div>
+      <p class="note" style="color:rgba(255,255,255,.66)">本ページは当サロンのオリジナル企画です。特定のテーマパーク・映画会社等とは一切関係ありません。</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== RECRUIT ===================== -->
+<div class="view" id="v-recruit">
+  <section class="hero">
+    <div class="bg"><img src="assets/team.jpg" alt="エントランスに並ぶALVELLAのスタッフたち" loading="lazy" width="1400" height="1050"></div>
+    <div class="wrap hero-in">
+      <p class="eyebrow">ALVELLA 採用|京都・烏丸御池</p>
+      <h1>10年先も、<br><span class="g">美容師でいられる</span>場所。</h1>
+      <p class="sub">髪を健やかに導く技術と、人を想うおもてなしを、京都・烏丸御池の半個室サロンで。月曜も火曜も、ちゃんと休む。営業時間の中で、ちゃんと育つ。</p>
+      <div class="btn-row">
+        <a class="btn btn-fill" href="#r-contact">まずはサロン見学から</a>
+        <a class="btn btn-line" style="color:#fff" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">DMで気軽に相談</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec green" id="r-numbers">
+    <div class="wrap">
+      <p class="sec-label rv">Numbers</p>
+      <h2 class="sec-title rv">数字で見る、ALVELLAの働き方。</h2>
+      <p class="sec-lead rv">世界観だけでは、安心して飛び込めない。だから先に、条件を全部見せます。</p>
+      <div class="nums rv">
+        <div><p class="l">休日</p><p class="v">完全週休<b>2</b>日</p><p class="n">月曜・火曜の固定連休</p></div>
+        <div><p class="l">給与</p><p class="v">月給<b>23</b>万円〜</p><p class="n">賞与年2回(業績による)</p></div>
+        <div><p class="l">デビュー</p><p class="v">最短<b>1.5</b>年</p><p class="n">独自カリキュラム×個別レッスン</p></div>
+        <div><p class="l">店販手当</p><p class="v"><b>15</b>〜<b>20</b>%</p><p class="n">がんばりが還元される</p></div>
+        <div><p class="l">有給休暇</p><p class="v"><b>10</b>日</p><p class="n">入社半年後・土日消化も可</p></div>
+        <div><p class="l">長期休暇</p><p class="v">夏<b>4</b>+年末<b>5</b></p><p class="n">+アニバーサリー休暇1日</p></div>
+      </div>
+      <p class="note" style="color:rgba(247,244,239,.6)">※求人媒体(QJナビ・ホットペッパービューティーワーク等)掲載情報に基づく。詳細は募集要項をご覧ください。</p>
+    </div>
+  </section>
+
+  <section class="sec washi" id="r-message">
+    <div class="wrap">
+      <p class="sec-label rv">Message</p>
+      <h2 class="sec-title rv">感動体験を、つくる側へ。</h2>
+      <div class="msg-photo rv"><img src="assets/owner.jpg" alt="ALVELLAオーナーの角井竜" loading="lazy" width="679" height="509"></div>
+      <!-- 以下のメッセージは公開情報をもとにした草稿です。公開前に必ずご本人の確認・加筆をお願いします -->
+      <div class="rv" style="color:#3C3A34">
+        <p>ALVELLAが目指しているのは、テーマパークのような空間と感動体験です。扉を開けた瞬間から、髪だけでなく心までほどけていく。お客様が「また来たい」と思ってくださる時間を、チーム全員でつくっています。</p>
+        <p>掲げているのは「10年先も健康的な美髪を」。流行のスタイルをつくって終わりではなく、髪の健康と向き合い、一人ひとりの10年先まで責任を持つ。そのために、髪質改善とヘッドスパに特化した半個室のケアサロンという形を選びました。</p>
+        <p>同じことは、働く仲間に対しても思っています。10年先も、美容師でいられること。ちゃんと休めて、営業時間の中で成長できて、感謝と笑顔があふれる場所で働けること。この仕事が好きな人が、この仕事を長く続けられるサロンでありたいのです。</p>
+        <p>技術は、あとからいくらでも教えられます。挨拶ができて、ありがとうを言える人。お客様と仲間を大切にできる人。そんなあなたに会えるのを、楽しみにしています。</p>
+        <div class="sign">
+          <p class="r">ALVELLA オーナー|期待を超えるおもてなしプロデューサー(美容師歴11年)</p>
+          <p class="n">角井 竜</p>
+          <a class="ig" style="color:#8a7451" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="r-why" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Why ALVELLA</p>
+      <h2 class="sec-title rv">ALVELLAで働くということ。</h2>
+      <p class="sec-lead rv">回転数を追う大量集客型のサロンとは、選んだ道が違います。この業態だからこそ身につく力があります。</p>
+      <div class="stack c3 rv">
+        <div class="card">
+          <p class="role" style="font-size:12.5px;color:var(--accent-dp);font-weight:700">VALUE 01</p>
+          <h3 style="font-family:var(--serif);font-size:20px;color:var(--midori);margin:6px 0;font-weight:600">ケアの技術が身につく</h3>
+          <p style="font-size:14.5px;color:var(--ink-2)">髪質改善とヘッドスパに特化したケアサロン。水素トリートメントやAujuaを扱い、髪の健康と向き合う専門性が身につきます。</p>
+        </div>
+        <div class="card">
+          <p class="role" style="font-size:12.5px;color:var(--accent-dp);font-weight:700">VALUE 02</p>
+          <h3 style="font-family:var(--serif);font-size:20px;color:var(--midori);margin:6px 0;font-weight:600">一人と深く向き合える</h3>
+          <p style="font-size:14.5px;color:var(--ink-2)">4席・半個室・マンツーマン施術。数をこなして消耗するのではなく、カウンセリングからおもてなしまでを丁寧に学べます。</p>
+        </div>
+        <div class="card">
+          <p class="role" style="font-size:12.5px;color:var(--accent-dp);font-weight:700">VALUE 03</p>
+          <h3 style="font-family:var(--serif);font-size:20px;color:var(--midori);margin:6px 0;font-weight:600">少人数のあたたかさ</h3>
+          <p style="font-size:14.5px;color:var(--ink-2)">一人ひとりに目が届き、教育も働き方も「その人に合わせて」考えられます。大切にしているのは、挨拶と感謝、そして笑顔。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="r-members">
+    <div class="wrap">
+      <p class="sec-label rv">Members</p>
+      <h2 class="sec-title rv">一緒に働く、先輩たち。</h2>
+      <p class="sec-lead rv">少人数だから、一人ひとりの顔が見えるチームです。得意分野の違う先輩たちが、あなたの成長に伴走します。</p>
+      <div class="stack c3 rv">
+        <div class="person">
+          <div class="ph"><img src="assets/owner.jpg" alt="オーナーの角井竜" loading="lazy" width="679" height="509"></div>
+          <div class="body"><p class="role">オーナー(歴11年)</p><h3>角井 竜<small>カクイ リュウ</small></h3><p>「テーマパークのようなおもてなし」の発信源。大人可愛いを叶える美髪プロデュースが得意です。</p><a class="ig" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">@alvella_kakui</a></div>
+        </div>
+        <div class="person">
+          <div class="ph"><img src="assets/portrait-staff.jpg" alt="スタイリストの澁谷憂樹" loading="lazy" width="960" height="1280"></div>
+          <div class="body"><p class="role">トータルケアコンシェルジュ(歴6年)</p><h3>澁谷 憂樹<small>シブヤ ユウキ</small></h3><p>【20代 支持率No.1】丁寧なカウンセリングが好評。艶髪スタイルと髪質改善が得意な先輩です。</p><a class="ig" href="https://www.instagram.com/alvella_yuuki/" target="_blank" rel="noopener">@alvella_yuuki</a></div>
+        </div>
+        <div class="person">
+          <div class="ph"><img src="assets/giriko.jpg" alt="スタイリストの儀利古真奈" loading="lazy" width="591" height="443"></div>
+          <div class="body"><p class="role">韓国好き美容師(歴5年)</p><h3>儀利古 真奈<small>ギリコ マナ</small></h3><p>韓国スタイル・透明感カラーが得意。「美容院は緊張する」というお客様に寄り添う空間づくりの名手。</p><a class="ig" href="https://www.instagram.com/alvella_giriko/" target="_blank" rel="noopener">@alvella_giriko</a></div>
+        </div>
+      </div>
+      <!-- TODO: スタッフインタビュー動画(儀利古さん / 澁谷さん)が書き出せたら、ここにクリック再生+要約テキストで設置 -->
+    </div>
+  </section>
+
+  <section class="sec washi" id="r-education">
+    <div class="wrap">
+      <p class="sec-label rv">Education</p>
+      <h2 class="sec-title rv">デビューまでの道のりを、見える化。</h2>
+      <p class="sec-lead rv">「いつデビューできるのか分からない」——アシスタントの一番の不安に、仕組みで答えます。レッスンは営業時間内。独自カリキュラムをベースに、一人ひとりのペースで進みます。</p>
+      <div class="stack c2 rv" style="margin-bottom:22px">
+        <div class="step"><b>STEP 01</b><h3>入社・基礎</h3><p>サロンワークの基礎とシャンプー・ヘッドスパから。未経験・通信生・新卒も歓迎です。</p></div>
+        <div class="step"><b>STEP 02</b><h3>ケア技術の習得</h3><p>髪質改善・トリートメント・カラーなど、ALVELLAの核となる技術を習得。メーカー講習も活用します。</p></div>
+        <div class="step"><b>STEP 03</b><h3>接客・カウンセリング</h3><p>技術と並行して、カウンセリング研修・スタイリング研修へ。10年先を提案できる美容師を目指します。</p></div>
+        <div class="step"><b>STEP 04</b><h3>スタイリストデビュー</h3><p>デビュー後も学びは続きます。その先には店長・教育担当、そして独立支援制度というキャリアも。</p></div>
+      </div>
+      <div class="goal rv"><b>最短 <em>1年半</em> でスタイリストデビュー</b><p>営業時間内レッスンだから、練習のために夜が消えない。中途で技術に不安がある方への個別サポートもあります。</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="r-career" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Career Path</p>
+      <h2 class="sec-title rv">デビューは、ゴールじゃない。</h2>
+      <p class="sec-lead rv">小さなサロンだからこそ、手を挙げた人に役割が生まれます。</p>
+      <div class="stack c2 rv">
+        <div class="card"><p style="font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;color:var(--accent-dp)">PATH 01</p><h3 style="font-family:var(--serif);font-size:19px;color:var(--midori);margin:6px 0;font-weight:600">技術を極める</h3><p style="font-size:14.5px;color:var(--ink-2)">髪質改善・ヘッドスパの専門性を磨き、指名で選ばれるスタイリストへ。</p></div>
+        <div class="card"><p style="font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;color:var(--accent-dp)">PATH 02</p><h3 style="font-family:var(--serif);font-size:19px;color:var(--midori);margin:6px 0;font-weight:600">教育に携わる</h3><p style="font-size:14.5px;color:var(--ink-2)">個別レッスンの担い手として、後輩の成長に伴走する道。教えることは、いちばんの学びでもあります。</p></div>
+        <div class="card"><p style="font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;color:var(--accent-dp)">PATH 03</p><h3 style="font-family:var(--serif);font-size:19px;color:var(--midori);margin:6px 0;font-weight:600">お店をつくる</h3><p style="font-size:14.5px;color:var(--ink-2)">サロンワークの先にある、店づくり・チームづくりへ。経営の近くで働けます。</p></div>
+        <div class="card"><p style="font-family:var(--serif);font-size:12.5px;letter-spacing:.18em;color:var(--accent-dp)">PATH 04</p><h3 style="font-family:var(--serif);font-size:19px;color:var(--midori);margin:6px 0;font-weight:600">独立する</h3><p style="font-size:14.5px;color:var(--ink-2)">独立支援制度があります。ALVELLAで学んだ技術とおもてなしを、自分の店で。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="r-day">
+    <div class="wrap">
+      <p class="sec-label rv">One Day</p>
+      <h2 class="sec-title rv">ALVELLAの、ある一日。</h2>
+      <div class="tl rv">
+        <div><p class="t">OPEN前</p><div><h3>出勤・オープン準備</h3><p>掃除とセッティング、今日のご予約の共有。半個室のしつらえを整えます。</p></div></div>
+        <div><p class="t">午前</p><div><h3>サロンワーク/レッスン</h3><p>マンツーマンの施術サポート。空き時間には営業時間内レッスン。先輩がその場でフィードバックします。</p></div></div>
+        <div><p class="t">お昼</p><div><h3>昼休憩</h3><p>食事補助として、お昼にお米の支給があります。スタッフ同士の何気ない会話でひと息。</p></div></div>
+        <div><p class="t">午後</p><div><h3>サロンワーク/研修</h3><p>髪質改善やヘッドスパの施術が続く時間帯。カウンセリング研修やメーカー講習が入る日もあります。</p></div></div>
+        <div><p class="t">CLOSE</p><div><h3>片付け・退勤</h3><p>1日実働8時間。19時に営業終了。月曜・火曜はしっかり休んで、自分の時間を大切に。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec washi" id="r-env">
+    <div class="wrap">
+      <p class="sec-label rv">Environment</p>
+      <h2 class="sec-title rv">働く場所を、先に見せます。</h2>
+      <p class="sec-lead rv">ネイビーと金の額縁ミラー。あなたが毎日立つことになる場所です。</p>
+      <div class="grid2 rv">
+        <figure><img src="assets/interior-main.jpg" alt="金の額縁ミラーが並ぶ店内" loading="lazy" width="1479" height="1109"><figcaption>セット面4席・半個室のフロア</figcaption></figure>
+        <figure><img src="assets/interior-booth.jpg" alt="半個室ブース" loading="lazy" width="1400" height="1050"><figcaption>一組ごとの施術空間</figcaption></figure>
+        <figure><img src="assets/welcome.jpg" alt="エントランスでお出迎えするスタッフ" loading="lazy" width="1400" height="1050"><figcaption>ネイビーのエントランス</figcaption></figure>
+        <figure><img src="assets/styling.jpg" alt="施術風景" loading="lazy" width="1156" height="648"><figcaption>マンツーマンのサロンワーク</figcaption></figure>
+        <figure><img src="assets/counseling-2.jpg" alt="カウンセリングの様子" loading="lazy" width="1400" height="1050"><figcaption>時間をかけるカウンセリング</figcaption></figure>
+        <figure><img src="assets/team.jpg" alt="スタッフの集合写真" loading="lazy" width="1400" height="1050"><figcaption>少人数のあたたかいチーム</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec green" id="r-persona">
+    <div class="wrap">
+      <p class="sec-label rv">Who We Want</p>
+      <h2 class="sec-title rv">技術より先に、見ているもの。</h2>
+      <p class="sec-lead rv">技術は、あとからいくらでも教えられます。私たちが最初に見ているのは、もっと手前にあるものです。</p>
+      <ul class="persona rv">
+        <li><b>01</b><div><h3>挨拶ができて、ありがとうを言える人</h3><p>おもてなしの始まりは、いつも挨拶から。お客様にも、仲間にも、感謝を言葉にできる人と働きたいと思っています。</p></div></li>
+        <li><b>02</b><div><h3>「おもてなし」にワクワクできる人</h3><p>テーマパークのような感動体験をつくるのがALVELLAの流儀。喜ばせるための工夫を、楽しめる人に向いています。</p></div></li>
+        <li><b>03</b><div><h3>髪の健康と、丁寧に向き合いたい人</h3><p>流行を追うだけでなく、10年先の美髪まで考える。一人のお客様とじっくり向き合う接客が好きな人に合う環境です。</p></div></li>
+      </ul>
+      <p class="note" style="color:rgba(247,244,239,.72)">※正直に書くと——回転数で数をこなすスタイルのサロンではないので、「とにかく速く・多く」を求める方には向かないかもしれません。そのぶん、一人ひとりと深く向き合いたい方には、これ以上ない環境だと思います。未経験・通信制在学中・新卒、いずれも歓迎です。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="r-req" style="background:var(--paper-2)">
+    <div class="wrap">
+      <p class="sec-label rv">Recruit</p>
+      <h2 class="sec-title rv">募集要項</h2>
+      <table class="table rv">
+        <tr><th>募集職種</th><td><b>美容師アシスタント/スタイリスト</b>(正社員)</td></tr>
+        <tr><th>給与</th><td><span class="hl">月給230,000円〜</span>(経験・能力を考慮/求人票レンジ 23万〜50万円)<br>賞与年2回(業績による)/店販手当15〜20%</td></tr>
+        <tr><th>勤務時間</th><td>1日実働8時間・週5日勤務(営業 9:00〜19:00)</td></tr>
+        <tr><th>休日・休暇</th><td><span class="hl">完全週休2日制(月曜・火曜)</span><br>夏期休暇4日/年末年始休暇5日/アニバーサリー休暇1日<br>有給休暇 入社半年後10日付与(土日消化も可)</td></tr>
+        <tr><th>福利厚生</th><td>社会保険完備(雇用・労災・健康・厚生年金)/交通費支給(月15,000円まで)/住宅手当/健康診断(年1回)/独立支援制度/食事補助(昼にお米の支給)</td></tr>
+        <tr><th>教育制度</th><td>独自カリキュラム×個別レッスン/営業時間内レッスン/メーカー講習/カウンセリング・スタイリング研修/最短1年半でスタイリストデビュー</td></tr>
+        <tr><th>応募資格</th><td>美容師免許保持者または取得見込みの方<br>未経験・通信制在学中・新卒歓迎/中途で技術に不安のある方も個別にサポートします</td></tr>
+        <tr><th>勤務地</th><td>ALVELLA(アルベラ)<br>京都府京都市中京区玉蔵町123 グランレブリー室町六角101<br>地下鉄「四条駅」22番出口・「烏丸御池駅」6番出口から徒歩6分</td></tr>
+        <tr><th>運営会社</th><td>株式会社ALVELLA</td></tr>
+      </table>
+      <p class="note">※掲載内容は求人媒体の公開情報に基づきます。最新の条件は見学・面接時にご確認ください。</p>
+    </div>
+  </section>
+
+  <section class="sec" id="r-flow">
+    <div class="wrap">
+      <p class="sec-label rv">Flow</p>
+      <h2 class="sec-title rv">応募から入社まで。</h2>
+      <p class="sec-lead rv">かしこまった就活より、まずお互いを知ることから。見学からのスタートをおすすめしています。</p>
+      <div class="stack c2 rv">
+        <div class="step"><b>STEP 01</b><h3>サロン見学</h3><p>私服OK・手ぶらOK。サロンの空気と先輩の働き方を、あなたの目で確かめてください。</p></div>
+        <div class="step"><b>STEP 02</b><h3>応募</h3><p>InstagramのDM、または求人媒体(QJナビ等)からご応募ください。履歴書の準備はその後で大丈夫です。</p></div>
+        <div class="step"><b>STEP 03</b><h3>面接</h3><p>サロンでゆっくりお話しします。聞きにくいこと(給与・休み・練習)こそ、遠慮なく聞いてください。</p></div>
+        <div class="step"><b>STEP 04</b><h3>内定・入社</h3><p>入社日はご事情に合わせて相談できます。通信制在学中の方は学業との両立もご相談ください。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec washi" id="r-faq">
+    <div class="wrap">
+      <p class="sec-label rv">FAQ</p>
+      <h2 class="sec-title rv">よくあるご質問</h2>
+      <div class="faq rv">
+        <details><summary>スタイリストデビューまで、どのくらいかかりますか?</summary><p class="a">最短1年半です。独自カリキュラムをベースに、個別レッスンで一人ひとりのペースに合わせて進めるので、現在の技術レベルに関わらずスタートできます。</p></details>
+        <details><summary>レッスンは営業後に長時間やるのでしょうか?</summary><p class="a">ALVELLAには営業時間内レッスンの仕組みがあります。詳しいレッスンの進め方は、見学時に現場を見ながらご説明します。</p></details>
+        <details><summary>お休みはちゃんと取れますか?</summary><p class="a">完全週休2日制(月曜・火曜)です。加えて夏期4日・年末年始5日・アニバーサリー休暇1日、有給休暇は入社半年後に10日付与され、土日での消化も可能です。</p></details>
+        <details><summary>営業時間と、働く時間のイメージは?</summary><p class="a">サロンの営業は9:00〜19:00、定休日は毎週月曜・火曜です。1日実働8時間・週5日勤務で、完全予約制のため一日の見通しが立てやすい環境です。</p></details>
+        <details><summary>一人暮らしでも生活できますか?</summary><p class="a">社会保険完備に加えて、住宅手当と交通費支給(月15,000円まで)があります。京都市外からの通勤・転居のご相談も面接時にどうぞ。</p></details>
+        <details><summary>通信制の学生や未経験でも応募できますか?</summary><p class="a">はい、未経験・通信制在学中・新卒いずれも歓迎です。個別レッスンで基礎から学べます。</p></details>
+        <details><summary>中途ですが、ブランクや技術に不安があります。</summary><p class="a">技術に不安がある方への個別サポートがあります。カウンセリングやケア技術など、ALVELLAのやり方を基礎から丁寧にお伝えしますのでご安心ください。</p></details>
+        <details><summary>見学だけでも大丈夫ですか?服装は?</summary><p class="a">もちろんです。むしろ、まず見学からをおすすめしています。私服で、手ぶらでお越しください。InstagramのDMから気軽にお申し込みいただけます。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec green" id="r-contact" style="text-align:center">
+    <div class="wrap">
+      <h2 class="sec-title rv">まずは、見学から。</h2>
+      <p class="sec-lead rv" style="margin-left:auto;margin-right:auto">応募を決めてから来なくて、大丈夫。サロンの空気と先輩たちの働き方を、あなたの目で確かめてください。私服OK・手ぶらOK・質問だけでも歓迎です。</p>
+      <div class="btn-row rv">
+        <a class="btn btn-fill" href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">DMで見学を申し込む</a>
+        <a class="btn btn-line" style="color:var(--gold-lt)" href="https://www.instagram.com/alvella_kakui/" target="_blank" rel="noopener">オーナーに直接質問する</a>
+        <a class="btn btn-line" style="color:var(--gold-lt)" href="https://www.qjnavi.jp/job/kyoto/26104/ab2001584800001" target="_blank" rel="noopener">QJナビの求人を見る</a>
+      </div>
+    </div>
+  </section>
+</div>
 
 <footer>
-  <p class="flogo">ALVELLA</p>
-  <div class="flinks">
-    <a href="#concept">コンセプト</a>
-    <a href="#menu">メニュー</a>
-    <a href="#specialty">髪質改善・ヘッドスパ</a>
-    <a href="#staff">スタッフ</a>
-    <a href="#access">アクセス</a>
-    <a href="park.html">PARK HAIR GUIDE</a>
-    <a href="recruit.html">採用サイト</a>
-  </div>
-  <p>ALVELLA(アルベラ)|〒604-8121 京都府京都市中京区玉蔵町123 グランレブリー室町六角101|TEL 070-1741-3841</p>
-  <div class="flinks" style="margin-top:14px">
+  <p class="fl">ALVELLA</p>
+  <p>ALVELLA(アルベラ)<br>〒604-8121 京都府京都市中京区玉蔵町123 グランレブリー室町六角101<br>TEL <a href="tel:07017413841">070-1741-3841</a>|9:00〜19:00(月・火定休)</p>
+  <div class="links">
     <a href="https://www.instagram.com/alvella_official/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">ホットペッパービューティー</a>
   </div>
-  <p class="note">※口コミ評価・年間来店数はホットペッパービューティー等の掲載情報に基づきます(掲載時点)。</p>
-  <p style="margin-top:12px">&copy; 2026 ALVELLA. All rights reserved.</p>
+  <p class="sm">※口コミ評価・数値はホットペッパービューティー等の掲載情報に基づきます(掲載時点)。<br>&copy; 2026 ALVELLA. All rights reserved.</p>
 </footer>
 
-<div class="mobile-bar" id="mobileBar">
-  <a class="m-web" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener">WEB予約(24時間)</a>
-  <a class="m-tel" href="tel:07017413841">電話する</a>
+<!-- ===================== menu sheet ===================== -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="メニュー">
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-panel">
+    <div class="sheet-grip"></div>
+    <h2>SALON — サロン</h2>
+    <a href="#s-concept" data-go="salon">コンセプト</a>
+    <a href="#s-menu" data-go="salon">メニュー・料金</a>
+    <a href="#s-care" data-go="salon">髪質改善・ヘッドスパ</a>
+    <a href="#s-first" data-go="salon">はじめての方へ</a>
+    <a href="#s-staff" data-go="salon">スタッフ</a>
+    <a href="#s-gallery" data-go="salon">ギャラリー</a>
+    <a href="#s-access" data-go="salon">店舗情報・アクセス</a>
+    <h2>PARK — パーク前ヘア</h2>
+    <a href="#p-morning" data-go="park">朝9時からの過ごし方</a>
+    <a href="#p-ideas" data-go="park">スタイルのアイデア</a>
+    <a href="#p-packing" data-go="park">持ち物メモ</a>
+    <a href="#p-quiz" data-go="park">ものがたり検定</a>
+    <h2>RECRUIT — 採用</h2>
+    <a href="#r-numbers" data-go="recruit">数字で見る働き方</a>
+    <a href="#r-message" data-go="recruit">代表メッセージ</a>
+    <a href="#r-members" data-go="recruit">一緒に働く先輩</a>
+    <a href="#r-education" data-go="recruit">教育・デビュー</a>
+    <a href="#r-req" data-go="recruit">募集要項</a>
+    <a href="#r-faq" data-go="recruit">よくある質問</a>
+    <button class="close" data-close>閉じる</button>
+  </div>
 </div>
+
+<!-- ===================== bottom tab bar ===================== -->
+<nav class="tabbar" aria-label="サイト内の切り替え">
+  <a href="#salon" class="tab on" data-tab="salon"><i aria-hidden="true">✦</i>サロン</a>
+  <a href="#park" class="tab" data-tab="park"><i aria-hidden="true">✿</i>パーク</a>
+  <a href="#recruit" class="tab" data-tab="recruit"><i aria-hidden="true">✧</i>採用</a>
+  <a class="cta" id="ctaTab" href="https://beauty.hotpepper.jp/slnH000680090/" target="_blank" rel="noopener"><i aria-hidden="true">◈</i>予約する</a>
+</nav>
 
 <script type="application/ld+json">
 {
@@ -583,42 +927,95 @@ footer .note{font-size:10px;color:rgba(247,243,236,.45);margin-top:14px}
   "image": "assets/interior-main.jpg",
   "telephone": "+81-70-1741-3841",
   "priceRange": "¥7,700〜",
-  "address": {
-    "@type": "PostalAddress",
-    "postalCode": "604-8121",
-    "addressRegion": "京都府",
-    "addressLocality": "京都市中京区",
-    "streetAddress": "玉蔵町123 グランレブリー室町六角101",
-    "addressCountry": "JP"
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "09:00",
-      "closes": "19:00"
-    }
-  ],
-  "sameAs": [
-    "https://www.instagram.com/alvella_official/",
-    "https://www.instagram.com/alvella_kakui/",
-    "https://www.instagram.com/alvella_yuuki/",
-    "https://www.instagram.com/alvella_giriko/",
-    "https://beauty.hotpepper.jp/slnH000680090/"
-  ]
+  "address": {"@type":"PostalAddress","postalCode":"604-8121","addressRegion":"京都府","addressLocality":"京都市中京区","streetAddress":"玉蔵町123 グランレブリー室町六角101","addressCountry":"JP"},
+  "openingHoursSpecification": [{"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"09:00","closes":"19:00"}],
+  "sameAs": ["https://www.instagram.com/alvella_official/","https://www.instagram.com/alvella_kakui/","https://www.instagram.com/alvella_yuuki/","https://www.instagram.com/alvella_giriko/","https://beauty.hotpepper.jp/slnH000680090/"]
 }
 </script>
 <!-- TODO: 住所の緯度経度確認後に geo を追加。独自ドメイン確定後に url を追加 -->
 
 <script>
-if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
-}
-const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}})},{threshold:.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-const bar=document.getElementById('mobileBar');
-const hero=document.querySelector('.hero');
-new IntersectionObserver((es)=>{es.forEach(e=>bar.classList.toggle('show',!e.isIntersecting))},{threshold:.2}).observe(hero);
+(function(){
+  var VIEWS = ['salon','park','recruit'];
+  var CTA = {
+    salon:   {href:'https://beauty.hotpepper.jp/slnH000680090/', label:'予約する', ext:true},
+    park:    {href:'https://www.instagram.com/alvella_official/', label:'DM相談', ext:true},
+    recruit: {href:'#r-contact', label:'見学する', ext:false}
+  };
+  var body = document.body, sheet = document.getElementById('sheet'), ctaTab = document.getElementById('ctaTab');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function playable(v){ return v.closest('.view').classList.contains('on'); }
+  function syncVideos(){
+    document.querySelectorAll('video').forEach(function(v){
+      if (reduce) { v.pause(); return; }
+      if (playable(v)) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+      else v.pause();
+    });
+  }
+
+  function setView(name, scroll){
+    if (VIEWS.indexOf(name) < 0) name = 'salon';
+    body.setAttribute('data-view', name);
+    VIEWS.forEach(function(v){
+      document.getElementById('v-' + v).classList.toggle('on', v === name);
+    });
+    document.querySelectorAll('.tab').forEach(function(a){
+      a.classList.toggle('on', a.getAttribute('data-tab') === name);
+    });
+    var c = CTA[name];
+    ctaTab.href = c.href;
+    ctaTab.lastChild.nodeValue = c.label;
+    if (c.ext) { ctaTab.target = '_blank'; ctaTab.rel = 'noopener'; }
+    else { ctaTab.removeAttribute('target'); ctaTab.removeAttribute('rel'); }
+    if (scroll) window.scrollTo(0, 0);
+    syncVideos();
+    revealAll();
+  }
+
+  // hash routing: #salon / #park / #recruit / #section-id
+  function fromHash(initial){
+    var h = (location.hash || '').replace('#','');
+    if (!h) { setView('salon', !initial); return; }
+    if (VIEWS.indexOf(h) >= 0) { setView(h, true); return; }
+    var el = document.getElementById(h);
+    if (el) {
+      var view = el.closest('.view');
+      if (view) setView(view.id.replace('v-',''), false);
+      requestAnimationFrame(function(){
+        var y = el.getBoundingClientRect().top + window.pageYOffset - 58;
+        window.scrollTo({top: y, behavior: reduce ? 'auto' : 'smooth'});
+      });
+    }
+  }
+  window.addEventListener('hashchange', function(){ fromHash(false); });
+
+  // menu sheet
+  function openSheet(open){
+    sheet.classList.toggle('open', open);
+    document.getElementById('menuBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+  document.getElementById('menuBtn').addEventListener('click', function(){ openSheet(true); });
+  sheet.addEventListener('click', function(e){
+    if (e.target.hasAttribute('data-close')) openSheet(false);
+    var a = e.target.closest('a[data-go]');
+    if (a) { openSheet(false); }
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') openSheet(false); });
+
+  // reveal
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold: .12, rootMargin: '0px 0px -5% 0px'}) : null;
+  function revealAll(){
+    document.querySelectorAll('.view.on .rv:not(.in)').forEach(function(el){
+      if (io) io.observe(el); else el.classList.add('in');
+    });
+  }
+
+  fromHash(true);
+})();
 </script>
 </body>
 </html>
